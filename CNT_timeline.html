@@ -5,27 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Classical Nucleation Theory — A Timeline</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:        #FFFFFF;
-  --panel:     #F3F8FA;
-  --panel-2:   #FBFDFE;
-  --line:      #C9D8E0;
-  --ink:       #14181B;   /* body text */
-  --muted:     #4E6B7A;   /* secondary text */
-  --head:      #0F2230;   /* headings */
-  --cold:      #0E86A5;   /* cold accent: arrow, structure */
-  --cold-soft: #CFE6EC;
-  --superheat: #D96B1A;   /* warm accent: activation, critical events */
-  --superheat-dim: rgba(217,107,26,.12);
+  --panel:     #EEF1F8;
+  --panel-2:   #F8FAFE;
+  --line:      #C7D0E0;
+  --ink:       #1B2233;   /* body text */
+  --muted:     #384259;   /* secondary text */
+  --head:      #0D2659;   /* headings */
+  --cold:      #045073;   /* cold accent: arrow, structure */
+  --cold-soft: #CBD8EC;
+  --superheat: #EC5858;   /* warm accent: activation, critical events */
+  --superheat-dim: rgba(236,88,88,.12);
 }
 *{ margin:0; padding:0; box-sizing:border-box; }
 html,body{ height:100%; }
 body{
   background:
-    radial-gradient(1100px 500px at 78% -10%, rgba(14,134,165,.06), transparent 60%),
-    radial-gradient(900px 600px at 8% 110%, rgba(217,107,26,.05), transparent 55%),
+    radial-gradient(1100px 500px at 78% -10%, rgba(4,80,115,.06), transparent 60%),
+    radial-gradient(900px 600px at 8% 110%, rgba(236,88,88,.05), transparent 55%),
     var(--bg);
   color: var(--ink);
   font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
@@ -49,15 +49,15 @@ header{ display:flex; align-items:baseline; justify-content:space-between; gap:2
   color: var(--cold);
 }
 h1{
-  font-family:"Spectral", Georgia, serif;
-  font-weight: 500;
+  font-family:"IBM Plex Sans", "Segoe UI", sans-serif;
+  font-weight: 700;
   font-size: clamp(26px, 3.1vw, 38px);
   color: var(--head);
   line-height: 1.12;
   margin-top: 6px;
 }
 .question{
-  font-family:"Spectral", Georgia, serif;
+  font-family:"IBM Plex Sans", "Segoe UI", sans-serif;
   font-style: italic;
   font-weight: 400;
   color: var(--muted);
@@ -83,7 +83,7 @@ h1{
   left:0; right: var(--head-w);
   top: calc(var(--arrow-y) - var(--arrow-h)/2);
   height: var(--arrow-h);
-  background: linear-gradient(90deg, #EDF4F7, var(--cold-soft));
+  background: linear-gradient(90deg, #E9EEF6, var(--cold-soft));
   border: 1px solid var(--line);
   border-right: none;
   border-radius: 8px 0 0 8px;
@@ -102,7 +102,7 @@ h1{
   left:2px;
   top: calc(var(--arrow-y) - var(--arrow-h)/2 + 2px);
   height: calc(var(--arrow-h) - 4px);
-  background: linear-gradient(90deg, rgba(14,134,165,.25), var(--cold));
+  background: linear-gradient(90deg, rgba(4,80,115,.25), var(--cold));
   border-radius: 6px 3px 3px 6px;
   transition: width .45s cubic-bezier(.4,.1,.2,1);
   pointer-events:none;
@@ -166,19 +166,19 @@ h1{
 .node.active .bubble{
   width: 25px; height: 25px;
   border-color: var(--superheat);
-  background: radial-gradient(circle at 35% 30%, rgba(217,107,26,.45), rgba(217,107,26,.06) 65%);
-  box-shadow: 0 0 14px rgba(217,107,26,.35);
+  background: radial-gradient(circle at 35% 30%, rgba(236,88,88,.45), rgba(236,88,88,.06) 65%);
+  box-shadow: 0 0 14px rgba(236,88,88,.35);
 }
 .node.active .bubble::after{
   content:"";
   position:absolute; inset:-7px;
   border-radius:50%;
-  border:1px dashed rgba(217,107,26,.55);
+  border:1px dashed rgba(236,88,88,.55);
   animation: ringIn .4s ease-out;
 }
 .node.active .label .year{ color: var(--superheat); font-weight:500; }
 .node.active .label .who{ color: var(--head); font-weight: 500; }
-.node.active::after{ background: rgba(217,107,26,.55); }
+.node.active::after{ background: rgba(236,88,88,.55); }
 @keyframes ringIn{ from{ transform:scale(.6); opacity:0; } to{ transform:scale(1); opacity:1; } }
 
 /* ---------- detail panel ---------- */
@@ -197,8 +197,8 @@ h1{
 @keyframes fadeUp{ from{ opacity:0; transform: translateY(8px);} to{ opacity:1; transform:none;} }
 .panel h2{
   grid-column: 1 / -1;
-  font-family:"Spectral", Georgia, serif;
-  font-weight: 500;
+  font-family:"IBM Plex Sans", "Segoe UI", sans-serif;
+  font-weight: 600;
   font-size: clamp(20px, 2.1vw, 26px);
   color: var(--head);
   display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
@@ -209,13 +209,13 @@ h1{
   font-size: 11.5px; letter-spacing:.14em; text-transform:uppercase;
   color: var(--superheat);
   background: var(--superheat-dim);
-  border: 1px solid rgba(217,107,26,.35);
+  border: 1px solid rgba(236,88,88,.35);
   padding: 3px 10px; border-radius: 20px;
   font-weight: 500;
 }
 .panel .body{ font-size: 15.5px; line-height: 1.62; color: var(--ink); }
 .panel .body p + p{ margin-top: 10px; }
-.panel .body em{ color: #0A5D75; font-style: normal; font-weight: 600; }
+.panel .body em{ color: #033B54; font-style: normal; font-weight: 600; }
 .panel .body .terms{
   margin-top: 10px;
   font-size: 14px;
@@ -224,10 +224,10 @@ h1{
   border-left: 3px solid var(--cold-soft);
   padding-left: 14px;
 }
-.panel .body .terms i{ font-family:"Spectral", Georgia, serif; color: var(--head); font-size: 15px; }
+.panel .body .terms i{ font-family:"IBM Plex Sans", "Segoe UI", sans-serif; color: var(--head); font-size: 15px; }
 .aside{ display:flex; flex-direction:column; gap:12px; }
 .eq{
-  font-family:"Spectral", Georgia, serif;
+  font-family:"IBM Plex Sans", "Segoe UI", sans-serif;
   font-size: 17.5px;
   color: var(--head);
   background: var(--panel-2);
@@ -256,6 +256,45 @@ h1{
   color: var(--muted);
   padding: 6px 4px 2px;
 }
+
+/* ---------- reference line ---------- */
+.panel .ref{
+  grid-column: 1 / -1;
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.panel .ref .rlbl{
+  font-family:"IBM Plex Mono", monospace;
+  font-size: 10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--cold); margin-right: 8px;
+}
+.panel .ref a{ color: #033B54; text-decoration: none; border-bottom: 1px dotted #033B54; }
+.panel .ref a:hover{ color: var(--head); }
+
+/* ---------- data table (aside) ---------- */
+.dtable{
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--cold);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.dtable .lbl{
+  display:block;
+  font-family:"IBM Plex Mono", monospace;
+  font-size: 10.5px; letter-spacing:.16em; text-transform:uppercase;
+  color: var(--muted); margin-bottom: 8px;
+}
+.dtable table{ width:100%; border-collapse: collapse; font-size: 12.8px; }
+.dtable td{ padding: 5px 6px; vertical-align: top; border-bottom: 1px solid var(--cold-soft); line-height: 1.4; }
+.dtable tr:last-child td{ border-bottom: none; }
+.dtable td:first-child{ color: var(--head); font-weight: 500; white-space: nowrap; padding-right: 12px; }
+.dtable td:last-child{ color: var(--muted); }
+.dtable i{ font-style: italic; }
 
 /* ---------- footer / controls ---------- */
 footer{
@@ -333,113 +372,165 @@ footer{
 /* ---------- inline SVG figures ---------- */
 
 const FIG_GIBBS = `
-<svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Free energy versus radius for homogeneous and heterogeneous nucleation">
+<svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Free energy of formation versus embryo radius: total barrier as the sum of the surface and bulk terms, with the critical radius and barrier height marked">
   <defs>
     <marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L7,3 L0,6 z" fill="#14181B"/>
+      <path d="M0,0 L7,3 L0,6 z" fill="#1B2233"/>
     </marker>
   </defs>
-  <!-- axes -->
-  <line x1="40" y1="238" x2="40" y2="14" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah)"/>
-  <line x1="40" y1="150" x2="364" y2="150" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah)"/>
-  <text x="16" y="24" font-size="13" font-style="italic" fill="#14181B">&#916;G</text>
-  <text x="366" y="142" font-size="13" font-style="italic" fill="#14181B">R</text>
-  <!-- surface term ~R^2 (dashed warm) -->
-  <path d="M40,150 C 100,140 150,70 190,18" fill="none" stroke="#D96B1A" stroke-width="1.3" stroke-dasharray="5 4" opacity=".8"/>
-  <text x="150" y="38" font-size="11.5" fill="#D96B1A">surface &#8764; R&#178;</text>
-  <!-- bulk term ~ -R^3 (dashed grey) -->
-  <path d="M40,150 C 120,158 190,190 245,242" fill="none" stroke="#8A9AA5" stroke-width="1.3" stroke-dasharray="5 4"/>
-  <text x="238" y="222" font-size="11.5" fill="#8A9AA5">bulk &#8764; &#8722;R&#179;</text>
-  <!-- homogeneous barrier -->
-  <path d="M40,150 C 95,145 122,58 158,58 C 196,58 226,118 252,152 C 274,181 292,212 306,236" fill="none" stroke="#0E86A5" stroke-width="2.4"/>
-  <text x="196" y="60" font-size="12" fill="#0E86A5" font-weight="600">homogeneous</text>
-  <!-- heterogeneous barrier -->
-  <path d="M40,150 C 100,148 124,100 158,100 C 194,100 228,142 262,162 C 292,178 316,192 336,203" fill="none" stroke="#3D8B37" stroke-width="2.2"/>
-  <text x="216" y="106" font-size="12" fill="#3D8B37" font-weight="600">heterogeneous</text>
+  <!-- axes: zero-line at y=150, origin at x=46 -->
+  <line x1="46" y1="244" x2="46" y2="14" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah)"/>
+  <line x1="30" y1="150" x2="366" y2="150" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah)"/>
+  <text x="20" y="24" font-size="13" font-style="italic" fill="#1B2233">&#916;G</text>
+  <text x="368" y="145" font-size="13" font-style="italic" fill="#1B2233">R</text>
+  <text x="20" y="147" font-size="11" fill="#384259">0</text>
+  <!-- surface term +4 pi R^2 sigma (dashed warm) -->
+  <path d="M46.0,150.0 L49.1,150.0 L52.1,149.9 L55.2,149.7 L58.2,149.4 L61.3,149.1 L64.4,148.8 L67.4,148.3 L70.5,147.8 L73.5,147.2 L76.6,146.6 L79.6,145.8 L82.7,145.0 L85.8,144.2 L88.8,143.3 L91.9,142.3 L94.9,141.2 L98.0,140.1 L101.1,138.9 L104.1,137.6 L107.2,136.2 L110.2,134.8 L113.3,133.4 L116.3,131.8 L119.4,130.2 L122.5,128.5 L125.5,126.8 L128.6,124.9 L131.6,123.0 L134.7,121.1 L137.8,119.1 L140.8,117.0 L143.9,114.8 L146.9,112.6 L150.0,110.3 L153.0,107.9 L156.1,105.4 L159.2,102.9 L162.2,100.4 L165.3,97.7 L168.3,95.0 L171.4,92.2 L174.5,89.4 L177.5,86.4 L180.6,83.4 L183.6,80.4 L186.7,77.3 L189.7,74.1 L192.8,70.8 L195.9,67.5 L198.9,64.1 L202.0,60.6 L205.0,57.0 L208.1,53.4 L211.2,49.8 L214.2,46.0 L217.3,42.2 L220.3,38.3 L223.4,34.4 L226.5,30.3" fill="none" stroke="#EC5858" stroke-width="1.3" stroke-dasharray="5 4" opacity=".85"/>
+  <text x="228" y="30" font-size="11" fill="#EC5858">surface +4&#960;R&#178;&#963;</text>
+  <!-- bulk term -(4/3) pi R^3 dGv (dashed grey) -->
+  <path d="M46.0,150.0 L49.4,150.0 L56.1,150.0 L62.8,150.1 L69.5,150.1 L76.2,150.3 L82.9,150.6 L89.6,151.0 L96.3,151.5 L103.0,152.1 L109.7,153.0 L116.4,154.0 L123.1,155.3 L129.8,156.8 L136.5,158.6 L143.2,160.6 L149.9,163.0 L156.6,165.7 L163.3,168.7 L170.0,172.1 L176.7,175.9 L183.4,180.0 L190.1,184.7 L196.8,189.7 L203.5,195.2 L210.2,201.3 L216.9,207.8 L223.6,214.9 L230.3,222.5 L237.0,230.7 L243.7,239.5" fill="none" stroke="#8E99AB" stroke-width="1.3" stroke-dasharray="5 4"/>
+  <text x="246" y="238" font-size="11" fill="#8E99AB">bulk &#8722;&#8308;&#8543;&#960;R&#179;&#916;G&#7515;</text>
+  <!-- total barrier -->
+  <path d="M46.0,150.0 L56.2,149.6 L66.3,148.6 L76.5,146.9 L86.7,144.7 L96.8,142.0 L107.0,138.9 L117.2,135.6 L127.4,131.9 L137.5,128.1 L147.7,124.2 L157.9,120.2 L168.0,116.3 L178.2,112.5 L188.4,108.9 L198.5,105.6 L208.7,102.6 L218.9,100.0 L229.1,97.9 L239.2,96.3 L249.4,95.4 L259.6,95.1 L269.7,95.7 L279.9,97.1 L290.1,99.4 L300.2,102.7 L310.4,107.1 L320.6,112.6 L330.7,119.3 L340.9,127.3 L346.0,131.8" fill="none" stroke="#045073" stroke-width="2.6"/>
+  <text x="120" y="120" font-size="12" fill="#045073" font-weight="600">&#916;G(R)</text>
   <!-- Rc marker -->
-  <line x1="158" y1="58" x2="158" y2="150" stroke="#14181B" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="150" y="166" font-size="12.5" font-style="italic" fill="#14181B">R</text>
-  <text x="158" y="169" font-size="9.5" font-style="italic" fill="#14181B">c</text>
-  <!-- barrier height -->
-  <line x1="70" y1="58" x2="70" y2="150" stroke="#D96B1A" stroke-width="1" stroke-dasharray="2 3"/>
-  <line x1="64" y1="58" x2="158" y2="58" stroke="#D96B1A" stroke-width="1" stroke-dasharray="2 3"/>
-  <text x="48" y="102" font-size="12.5" font-style="italic" fill="#D96B1A">&#916;G*</text>
+  <line x1="257.6" y1="95.1" x2="257.6" y2="150" stroke="#1B2233" stroke-width="1" stroke-dasharray="3 3"/>
+  <circle cx="257.6" cy="95.1" r="3.2" fill="#EC5858"/>
+  <text x="251" y="165" font-size="12.5" font-style="italic" fill="#1B2233">R</text>
+  <text x="259" y="168" font-size="9.5" font-style="italic" fill="#1B2233">c</text>
+  <!-- barrier height dG* -->
+  <line x1="60" y1="95.1" x2="257.6" y2="95.1" stroke="#EC5858" stroke-width="1" stroke-dasharray="2 3"/>
+  <text x="52" y="90" font-size="12.5" font-style="italic" fill="#EC5858">&#916;G*</text>
+  <!-- grow / shrink annotations -->
+  <text x="150" y="145" font-size="9.5" fill="#384259" text-anchor="middle">&#8592; shrink</text>
+  <text x="305" y="145" font-size="9.5" fill="#384259" text-anchor="middle">grow &#8594;</text>
 </svg>`;
 
 const FIG_ZELDOVICH = `
 <svg viewBox="0 0 380 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Random walk of cluster size over the free energy barrier">
   <defs>
     <marker id="ah2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L7,3 L0,6 z" fill="#14181B"/>
+      <path d="M0,0 L7,3 L0,6 z" fill="#1B2233"/>
     </marker>
     <marker id="ahW" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L7,3 L0,6 z" fill="#D96B1A"/>
+      <path d="M0,0 L7,3 L0,6 z" fill="#EC5858"/>
     </marker>
     <marker id="ahC" markerWidth="9" markerHeight="9" refX="7" refY="3.5" orient="auto">
-      <path d="M0,0 L8,3.5 L0,7 z" fill="#0E86A5"/>
+      <path d="M0,0 L8,3.5 L0,7 z" fill="#045073"/>
     </marker>
   </defs>
   <!-- axes -->
-  <line x1="30" y1="205" x2="30" y2="16" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah2)"/>
-  <line x1="30" y1="205" x2="364" y2="205" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah2)"/>
-  <text x="8" y="26" font-size="13" font-style="italic" fill="#14181B">&#916;G(n)</text>
-  <text x="366" y="199" font-size="13" font-style="italic" fill="#14181B">n</text>
+  <line x1="30" y1="205" x2="30" y2="16" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah2)"/>
+  <line x1="30" y1="205" x2="364" y2="205" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah2)"/>
+  <text x="8" y="26" font-size="13" font-style="italic" fill="#1B2233">&#916;G(n)</text>
+  <text x="366" y="199" font-size="13" font-style="italic" fill="#1B2233">n</text>
   <!-- Zeldovich zone -->
-  <rect x="162" y="55" width="56" height="150" fill="rgba(217,107,26,.10)" stroke="rgba(217,107,26,.45)" stroke-dasharray="3 3"/>
-  <text x="168" y="46" font-size="11.5" fill="#D96B1A">zone &#916;n (Z)</text>
+  <rect x="162" y="55" width="56" height="150" fill="rgba(236,88,88,.10)" stroke="rgba(236,88,88,.45)" stroke-dasharray="3 3"/>
+  <text x="168" y="46" font-size="11.5" fill="#EC5858">zone &#916;n (Z)</text>
   <!-- barrier -->
-  <path d="M30,200 C 100,192 140,60 190,60 C 240,60 285,170 350,192" fill="none" stroke="#0E86A5" stroke-width="2.4"/>
+  <path d="M30,200 C 100,192 140,60 190,60 C 240,60 285,170 350,192" fill="none" stroke="#045073" stroke-width="2.4"/>
   <!-- nc marker -->
-  <line x1="190" y1="60" x2="190" y2="205" stroke="#14181B" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="184" y="220" font-size="12.5" font-style="italic" fill="#14181B">n</text>
-  <text x="191" y="223" font-size="9.5" font-style="italic" fill="#14181B">c</text>
+  <line x1="190" y1="60" x2="190" y2="205" stroke="#1B2233" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="184" y="220" font-size="12.5" font-style="italic" fill="#1B2233">n</text>
+  <text x="191" y="223" font-size="9.5" font-style="italic" fill="#1B2233">c</text>
   <!-- random walk (zigzag up the left slope) -->
   <path d="M58,192 L74,180 L66,186 L88,166 L80,173 L104,146 L96,154 L122,118 L114,127 L142,90 L134,99 L162,72 L155,80 L178,64"
-        fill="none" stroke="#D96B1A" stroke-width="1.6" marker-end="url(#ahW)"/>
-  <text x="46" y="132" font-size="11.5" fill="#D96B1A" transform="rotate(-38 46 132)">random walk in n</text>
+        fill="none" stroke="#EC5858" stroke-width="1.6" marker-end="url(#ahW)"/>
+  <text x="46" y="132" font-size="11.5" fill="#EC5858" transform="rotate(-38 46 132)">random walk in n</text>
   <!-- flux over the barrier -->
-  <path d="M212,66 C 260,80 300,130 340,172" fill="none" stroke="#0E86A5" stroke-width="2" marker-end="url(#ahC)"/>
-  <text x="258" y="96" font-size="12" fill="#0E86A5" font-weight="600">steady flux J</text>
+  <path d="M212,66 C 260,80 300,130 340,172" fill="none" stroke="#045073" stroke-width="2" marker-end="url(#ahC)"/>
+  <text x="258" y="96" font-size="12" fill="#045073" font-weight="600">steady flux J</text>
 </svg>`;
 
 const FIG_TOLMAN = `
 <svg viewBox="0 0 380 235" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Density profile across the interface: sharp versus diffuse, with the two dividing surfaces">
   <defs>
     <marker id="ah3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L7,3 L0,6 z" fill="#14181B"/>
+      <path d="M0,0 L7,3 L0,6 z" fill="#1B2233"/>
     </marker>
     <marker id="dA" markerWidth="7" markerHeight="7" refX="5.5" refY="2.75" orient="auto">
-      <path d="M0,0 L6,2.75 L0,5.5 z" fill="#D96B1A"/>
+      <path d="M0,0 L6,2.75 L0,5.5 z" fill="#EC5858"/>
     </marker>
     <marker id="dB" markerWidth="7" markerHeight="7" refX="0.5" refY="2.75" orient="auto">
-      <path d="M6,0 L0,2.75 L6,5.5 z" fill="#D96B1A"/>
+      <path d="M6,0 L0,2.75 L6,5.5 z" fill="#EC5858"/>
     </marker>
   </defs>
   <!-- axes -->
-  <line x1="40" y1="210" x2="40" y2="16" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah3)"/>
-  <line x1="40" y1="210" x2="364" y2="210" stroke="#14181B" stroke-width="1.4" marker-end="url(#ah3)"/>
-  <text x="16" y="26" font-size="13" font-style="italic" fill="#14181B">&#961;(z)</text>
-  <text x="366" y="204" font-size="13" font-style="italic" fill="#14181B">z</text>
+  <line x1="40" y1="210" x2="40" y2="16" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah3)"/>
+  <line x1="40" y1="210" x2="364" y2="210" stroke="#1B2233" stroke-width="1.4" marker-end="url(#ah3)"/>
+  <text x="16" y="26" font-size="13" font-style="italic" fill="#1B2233">&#961;(z)</text>
+  <text x="366" y="204" font-size="13" font-style="italic" fill="#1B2233">z</text>
   <!-- density levels -->
-  <text x="48" y="56" font-size="12" font-style="italic" fill="#4E6B7A">&#961;</text>
-  <text x="55" y="59" font-size="9.5" font-style="italic" fill="#4E6B7A">liq</text>
-  <text x="322" y="168" font-size="12" font-style="italic" fill="#4E6B7A">&#961;</text>
-  <text x="329" y="171" font-size="9.5" font-style="italic" fill="#4E6B7A">vap</text>
+  <text x="48" y="56" font-size="12" font-style="italic" fill="#384259">&#961;</text>
+  <text x="55" y="59" font-size="9.5" font-style="italic" fill="#384259">liq</text>
+  <text x="322" y="168" font-size="12" font-style="italic" fill="#384259">&#961;</text>
+  <text x="329" y="171" font-size="9.5" font-style="italic" fill="#384259">vap</text>
   <!-- sharp profile (dashed step, capillarity approximation) -->
-  <path d="M40,60 L185,60 L185,175 L360,175" fill="none" stroke="#8A9AA5" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <path d="M40,60 L185,60 L185,175 L360,175" fill="none" stroke="#8E99AB" stroke-width="1.6" stroke-dasharray="6 4"/>
   <!-- diffuse profile -->
-  <path d="M40,60 C 120,60 158,64 196,117 C 232,168 268,175 360,175" fill="none" stroke="#0E86A5" stroke-width="2.4"/>
+  <path d="M40,60 C 120,60 158,64 196,117 C 232,168 268,175 360,175" fill="none" stroke="#045073" stroke-width="2.4"/>
   <!-- surfaces -->
-  <line x1="185" y1="34" x2="185" y2="210" stroke="#8A9AA5" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="212" y1="34" x2="212" y2="210" stroke="#D96B1A" stroke-width="1" stroke-dasharray="3 3"/>
-  <text x="150" y="228" font-size="11.5" fill="#4E6B7A">z&#8347; (tension)</text>
-  <text x="216" y="228" font-size="11.5" fill="#D96B1A">z&#8337; (equimolar)</text>
+  <line x1="185" y1="34" x2="185" y2="210" stroke="#8E99AB" stroke-width="1" stroke-dasharray="3 3"/>
+  <line x1="212" y1="34" x2="212" y2="210" stroke="#EC5858" stroke-width="1" stroke-dasharray="3 3"/>
+  <text x="150" y="228" font-size="11.5" fill="#384259">z&#8347; (tension)</text>
+  <text x="216" y="228" font-size="11.5" fill="#EC5858">z&#8337; (equimolar)</text>
   <!-- delta bracket -->
-  <line x1="185" y1="40" x2="212" y2="40" stroke="#D96B1A" stroke-width="1.4" marker-start="url(#dB)" marker-end="url(#dA)"/>
-  <text x="222" y="44" font-size="12.5" font-style="italic" fill="#D96B1A">&#948; = z&#8337; &#8722; z&#8347;</text>
+  <line x1="185" y1="40" x2="212" y2="40" stroke="#EC5858" stroke-width="1.4" marker-start="url(#dB)" marker-end="url(#dA)"/>
+  <text x="222" y="44" font-size="12.5" font-style="italic" fill="#EC5858">&#948; = z&#8337; &#8722; z&#8347;</text>
   <!-- legend -->
-  <text x="238" y="128" font-size="11.5" fill="#8A9AA5">sharp (capillarity approx.)</text>
-  <text x="70" y="96" font-size="11.5" fill="#0E86A5">real diffuse profile</text>
+  <text x="238" y="128" font-size="11.5" fill="#8E99AB">sharp (capillarity approx.)</text>
+  <text x="70" y="96" font-size="11.5" fill="#045073">real diffuse profile</text>
+</svg>`;
+
+const FIG_MASTER = `
+<svg viewBox="0 0 380 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cluster size ladder: clusters gain or lose one molecule at a time with attachment and detachment rates">
+  <defs>
+    <marker id="mF" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#045073"/>
+    </marker>
+    <marker id="mB" markerWidth="8" markerHeight="8" refX="6.5" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 z" fill="#EC5858"/>
+    </marker>
+  </defs>
+  <!-- three clusters as bubble clouds -->
+  <g>
+    <circle cx="55" cy="95" r="12" fill="#E9EEF6" stroke="#045073" stroke-width="1.4"/>
+    <circle cx="49" cy="90" r="4.5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <circle cx="60" cy="92" r="4.5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <circle cx="55" cy="100" r="4.5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <text x="55" y="132" font-size="12.5" font-style="italic" text-anchor="middle" fill="#1B2233">i&#8722;1</text>
+  </g>
+  <g>
+    <circle cx="190" cy="95" r="17" fill="#E9EEF6" stroke="#045073" stroke-width="1.6"/>
+    <circle cx="182" cy="89" r="5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <circle cx="195" cy="88" r="5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <circle cx="188" cy="99" r="5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <circle cx="198" cy="100" r="5" fill="#CBD8EC" stroke="#045073" stroke-width=".8"/>
+    <text x="190" y="137" font-size="12.5" font-style="italic" text-anchor="middle" fill="#1B2233">i</text>
+  </g>
+  <g>
+    <circle cx="330" cy="95" r="21" fill="#FBEAEA" stroke="#EC5858" stroke-width="1.6"/>
+    <circle cx="321" cy="88" r="5" fill="#F7D3D3" stroke="#EC5858" stroke-width=".8"/>
+    <circle cx="335" cy="86" r="5" fill="#F7D3D3" stroke="#EC5858" stroke-width=".8"/>
+    <circle cx="326" cy="98" r="5" fill="#F7D3D3" stroke="#EC5858" stroke-width=".8"/>
+    <circle cx="338" cy="99" r="5" fill="#F7D3D3" stroke="#EC5858" stroke-width=".8"/>
+    <circle cx="331" cy="103" r="5" fill="#F7D3D3" stroke="#EC5858" stroke-width=".8"/>
+    <text x="330" y="141" font-size="12.5" font-style="italic" text-anchor="middle" fill="#1B2233">i+1</text>
+  </g>
+  <!-- forward (attachment) arrows on top -->
+  <path d="M72,80 C 110,58 150,58 172,78" fill="none" stroke="#045073" stroke-width="1.6" marker-end="url(#mF)"/>
+  <path d="M209,78 C 250,56 285,56 309,78" fill="none" stroke="#045073" stroke-width="1.6" marker-end="url(#mF)"/>
+  <text x="120" y="52" font-size="12" fill="#045073" text-anchor="middle">&#946;<tspan font-size="9" dy="3">i&#8722;1</tspan></text>
+  <text x="262" y="50" font-size="12" fill="#045073" text-anchor="middle">&#946;<tspan font-size="9" dy="3">i</tspan></text>
+  <text x="120" y="40" font-size="10" fill="#384259" text-anchor="middle">+1 molecule</text>
+  <!-- backward (detachment) arrows on bottom -->
+  <path d="M172,112 C 150,132 110,132 72,110" fill="none" stroke="#EC5858" stroke-width="1.6" marker-end="url(#mB)"/>
+  <path d="M309,112 C 285,134 250,134 209,112" fill="none" stroke="#EC5858" stroke-width="1.6" marker-end="url(#mB)"/>
+  <text x="120" y="152" font-size="12" fill="#EC5858" text-anchor="middle">&#945;<tspan font-size="9" dy="3">i</tspan></text>
+  <text x="262" y="154" font-size="12" fill="#EC5858" text-anchor="middle">&#945;<tspan font-size="9" dy="3">i+1</tspan></text>
+  <text x="262" y="170" font-size="10" fill="#384259" text-anchor="middle">&#8722;1 molecule</text>
+  <!-- growth direction -->
+  <text x="190" y="196" font-size="10.5" fill="#384259" text-anchor="middle" font-style="italic">cluster grows one molecule at a time &#8594;</text>
 </svg>`;
 
 /* ---------- timeline data ---------- */
@@ -453,9 +544,10 @@ const EVENTS = [
     body: `<p>Gibbs establishes the thermodynamics of heterogeneous systems: creating a vapour embryo inside a liquid costs <em>surface</em> free energy (\u223c<i>R</i>\u00b2) but releases <em>bulk</em> free energy (\u223c<i>R</i>\u00b3). Their competition produces a maximum of \u0394<i>G</i>(<i>R</i>) at the critical radius <i>R<sub>c</sub></i>: embryos below <i>R<sub>c</sub></i> shrink, embryos above it grow spontaneously.</p>
     <p>Heterogeneous nucleation at walls, dissolved gases, or surface imperfections lowers the barrier by partially offsetting the surface-energy penalty. Gibbs also introduces the <em>capillarity approximation</em> \u2014 the surface tension of a nanometre-scale embryo is taken equal to the planar value \u03c3<sub>\u221e</sub> \u2014 which becomes the main source of quantitative error for cryogenic fluids.</p>`,
     eqLabel: "Free-energy barrier",
-    eq: "\u0394<i>G</i>(<i>R</i>) = \u2074\u2044\u2083\u03c0<i>R</i>\u00b3\u0394<i>G<sub>v</sub></i> + 4\u03c0<i>R</i>\u00b2\u03c3, \u2003 <i>R<sub>c</sub></i> = \u22122\u03c3/\u0394<i>G<sub>v</sub></i>",
+    eq: "\u0394<i>G</i>(<i>R</i>) = \u2212\u2074\u2044\u2083\u03c0<i>R</i>\u00b3\u0394<i>G<sub>v</sub></i> + 4\u03c0<i>R</i>\u00b2\u03c3, \u2003 <i>R<sub>c</sub></i> = 2\u03c3/\u0394<i>G<sub>v</sub></i>",
     fig: FIG_GIBBS,
-    figCap: "Competition of surface and bulk terms. The heterogeneous pathway has a lower barrier than the homogeneous one."
+    figCap: "\u0394G(R) as the sum of a bulk term (\u2212R\u00b3, grey) and a surface term (+R\u00b2, orange). Their competition produces the maximum \u0394G* at the critical radius R\u1d04: embryos below R\u1d04 shrink, those above grow.",
+    ref: "J. W. Gibbs, <i>On the Equilibrium of Heterogeneous Substances</i>, Trans. Connecticut Acad. Arts Sci. <b>3</b>, 108\u2013248 (1878)."
   },
   {
     year: "1926",
@@ -465,7 +557,8 @@ const EVENTS = [
     body: `<p>Volmer and Weber turn Gibbs' static barrier into a <em>kinetic</em> statement: the number of embryos that cross the barrier per unit volume and time is proportional to a Boltzmann factor of the barrier height.</p>
     <p>The insight is that nucleation is an <em>activated process</em>: the metastable liquid does not fail all at once; it waits for a rare, sufficiently large fluctuation. The barrier \u0394<i>G</i>* sets the energetic cost, but a kinetic prefactor is still needed to quantify how often critical nuclei form.</p>`,
     eqLabel: "Rate as an activated process",
-    eq: "<i>J</i> \u221d exp(\u2212\u0394<i>G</i>* / <i>k<sub>B</sub>T</i>)"
+    eq: "<i>J</i> \u221d exp(\u2212\u0394<i>G</i>* / <i>k<sub>B</sub>T</i>)",
+    ref: "M. Volmer & A. Weber, \u201cKeimbildung in \u00fcbers\u00e4ttigten Gebilden,\u201d <i>Z. Phys. Chem.</i> <b>119</b>, 277\u2013301 (1926)."
   },
   {
     year: "1935",
@@ -484,45 +577,61 @@ const EVENTS = [
     eqLabel: "Master equation and equilibrium distribution",
     eq: "d<i>n<sub>i</sub></i>/d<i>t</i> = \u03b2<sub><i>i</i>\u22121</sub><i>n</i><sub><i>i</i>\u22121</sub> + \u03b1<sub><i>i</i>+1</sub><i>n</i><sub><i>i</i>+1</sub> \u2212 (\u03b2<sub>i</sub> + \u03b1<sub>i</sub>)<i>n<sub>i</sub></i>",
     eq2Label: "Equilibrium cluster population",
-    eq2: "<i>n<sub>i</sub></i><sup>eq</sup> \u221d exp(\u2212\u0394<i>G<sub>i</sub></i> / <i>k<sub>B</sub>T</i>)"
+    eq2: "<i>n<sub>i</sub></i><sup>eq</sup> \u221d exp(\u2212\u0394<i>G<sub>i</sub></i> / <i>k<sub>B</sub>T</i>)",
+    fig: FIG_MASTER,
+    figCap: "The master equation as a birth\u2013death ladder in cluster size: an i-cluster gains a molecule at rate \u03b2\u1d62 (blue) or loses one at rate \u03b1\u1d62 (orange). Net upward flux along this ladder is nucleation.",
+    ref: "R. Becker & W. D\u00f6ring, \u201cKinetische Behandlung der Keimbildung in \u00fcbers\u00e4ttigten D\u00e4mpfen,\u201d <i>Ann. Phys.</i> <b>416</b>, 719\u2013752 (1935). doi:10.1002/andp.19354160806"
   },
   {
     year: "1942",
     who: "Zeldovich",
     tag: "Non-equilibrium correction",
     title: "Zeldovich — diffusion over the barrier",
-    body: `<p>For large clusters, adding one molecule is a small relative change, so the discrete master equation becomes a continuous <em>Fokker\u2013Planck equation</em>: the cluster size performs a random walk in size space, with drift <i>A</i>(<i>n</i>) \u221d \u2212d\u0394<i>G</i>/d<i>n</i> (shrink below <i>n<sub>c</sub></i>, grow above it) and diffusion <i>B</i>(<i>n</i>) from random attachment and detachment.</p>
-    <p>At steady state, a constant flux of clusters crosses the barrier: this flux <em>is</em> the nucleation rate. The <em>Zeldovich factor Z</em> measures the flatness of the barrier top \u2014 the width \u0394<i>n</i> over which clusters wander almost freely \u2014 and corrects the equilibrium population for the depletion caused by supercritical growth. CNT is therefore a <em>non-equilibrium</em> theory built on an underlying stochastic process.</p>`,
-    eqLabel: "Nucleation rate",
-    eq: "<i>J</i> = \u03c1<i>Z</i>\u03c9 exp(\u2212\u0394<i>G</i>* / <i>k<sub>B</sub>T</i>)",
-    eq2Label: "Fokker\u2013Planck equation in size space",
-    eq2: "\u2202<i>f</i>/\u2202<i>t</i> = \u2212\u2202<sub>n</sub>[<i>A</i>(<i>n</i>)<i>f</i>] + \u00bd\u2202<sup>2</sup><sub>n</sub>[<i>B</i>(<i>n</i>)<i>f</i>]",
+    body: `<p>Becker\u2013D\u00f6ring gives the <em>equilibrium</em> cluster distribution, but real nucleation is a steady <em>flow</em>: supercritical clusters keep growing and are removed, so the population near <i>n<sub>c</sub></i> is depleted below equilibrium. Zeldovich makes this quantitative. For large clusters, adding one molecule is a small relative change, so the discrete master equation becomes a continuous <em>Fokker\u2013Planck equation</em> \u2014 the cluster size performs a biased random walk in size space, with drift <i>A</i>(<i>n</i>) \u221d \u2212d\u0394<i>G</i>/d<i>n</i> (shrink below <i>n<sub>c</sub></i>, grow above it) and diffusion <i>B</i>(<i>n</i>) \u2248 \u03b2* from random attachment and detachment.</p>
+    <p>At steady state a <em>constant flux</em> of clusters crosses the barrier, and that flux <em>is</em> the nucleation rate <i>J</i>. The <em>Zeldovich factor Z</em> is the single dimensionless number that converts the equilibrium picture into this steady-flux rate. It has three equivalent readings: (i) it measures the <em>curvature</em> of the barrier top, <i>Z</i> = [\u2212(1/2\u03c0<i>k<sub>B</sub>T</i>)\u00b7\u2202\u00b2\u0394<i>G</i>/\u2202<i>n</i>\u00b2]<sup>\u00bd</sup> at <i>n</i>=<i>n<sub>c</sub></i>; (ii) it fixes the <em>width</em> \u0394<i>n</i> = 1/(<i>Z</i>\u221a\u03c0) of the near-flat region where clusters wander by diffusion rather than drift; (iii) it is the factor (typically \u2248 0.01\u20130.1) by which the true steady-state population at the top sits <em>below</em> equilibrium. CNT is therefore a <em>non-equilibrium</em> theory built on an underlying stochastic process.</p>`,
+    eqLabel: "Steady-state nucleation rate",
+    eq: "<i>J</i> = <i>Z</i> \u03b2* <i>N</i><sub>1</sub> exp(\u2212\u0394<i>G</i>* / <i>k<sub>B</sub>T</i>)",
+    eq2Label: "Zeldovich factor (barrier curvature)",
+    eq2: "<i>Z</i> = [ \u2212(1/2\u03c0<i>k<sub>B</sub>T</i>) (\u2202\u00b2\u0394<i>G</i>/\u2202<i>n</i>\u00b2)<sub><i>n<sub>c</sub></i></sub> ]<sup>1/2</sup>",
+    eq3Label: "Fokker\u2013Planck equation in size space",
+    eq3: "\u2202<i>f</i>/\u2202<i>t</i> = \u2212\u2202<sub>n</sub>[<i>A</i>(<i>n</i>)<i>f</i>] + \u00bd\u2202<sup>2</sup><sub>n</sub>[<i>B</i>(<i>n</i>)<i>f</i>]",
     fig: FIG_ZELDOVICH,
-    figCap: "The cluster size random-walks up the barrier; the steady flux of clusters through the Zeldovich zone \u0394n is the rate J."
+    figCap: "The cluster size random-walks up the barrier; the steady flux through the Zeldovich zone \u0394n \u2014 the near-flat band of width 1/(Z\u221a\u03c0) at the top \u2014 is the rate J.",
+    ref: "Ya. B. Zeldovich, \u201cOn the theory of new phase formation; cavitation,\u201d <i>Acta Physicochim. URSS</i> <b>18</b>, 1\u201322 (1943); <i>Zh. Eksp. Teor. Fiz.</i> <b>12</b>, 525 (1942)."
   },
   {
     year: "1949",
     who: "Tolman",
     tag: "Curvature correction",
     title: "Tolman — surface tension is not a constant",
-    body: `<p>Tolman shows that the surface tension of a strongly curved interface differs from the planar value. The correction is set by the <em>Tolman length \u03b4</em>: the distance between the <em>equimolar dividing surface z<sub>e</sub></em> (where the excess density vanishes) and the <em>surface of tension z<sub>s</sub></em> (where the mechanical tension acts). For simple liquids, \u03b4 is of order one molecular diameter.</p>
-    <p>The real interface is <em>diffuse</em>, not a sharp step: in descriptions based on a Helmholtz free-energy functional, the two surfaces can be computed directly from the density profile \u03c1(<i>z</i>). For a critical nucleus a few nanometres wide, \u03c3 falls 5\u20137% below \u03c3<sub>\u221e</sub>; because \u03c3 enters the barrier as \u03c3\u00b3 inside an exponential, this changes the predicted rate by orders of magnitude.</p>`,
+    body: `<p>The capillarity approximation takes \u03c3 = \u03c3<sub>\u221e</sub>, but for a nanometre embryo the choice of <em>where</em> the interface sits already matters. Minimising the <em>Helmholtz</em> work of formation at fixed <i>T</i>, <i>V</i> (with surface tension allowed to depend on the dividing-surface radius) gives a <em>generalized</em> Young\u2013Laplace balance, \u0394<i>p</i> = 2\u03b3(<i>R</i>)/<i>R</i> + d\u03b3/d<i>R</i>. The ordinary Laplace law \u0394<i>p</i> = 2\u03c3<sub>t</sub>/<i>R<sub>t</sub></i> is recovered only at the special <em>surface of tension</em>, where d\u03b3/d<i>R</i> = 0.</p>
+    <p>Tolman shows the surface tension of a strongly curved interface differs from the planar value. The correction is set by the <em>Tolman length \u03b4</em>: the offset between the <em>equimolar dividing surface z<sub>e</sub></em> (where the excess density vanishes) and the <em>surface of tension z<sub>s</sub></em> (where the mechanical tension acts). For simple liquids \u03b4 is of order one molecular diameter, and it is exactly this \u03b4 that a diffuse-interface density profile \u03c1(<i>z</i>) makes computable. For a critical nucleus a few nanometres wide, \u03c3 falls 5\u20137% below \u03c3<sub>\u221e</sub>; because \u03c3 enters the barrier as \u03c3\u00b3 inside an exponential, this shifts the predicted rate by orders of magnitude \u2014 the dominant correction for cryogenic fluids.</p>`,
     eqLabel: "Curvature-corrected surface tension",
-    eq: "\u03c3(<i>R</i>) = \u03c3<sub>\u221e</sub>(1 \u2212 2\u03b4/<i>R</i> + \u2026), \u2003 \u03b4 = <i>z<sub>e</sub></i> \u2212 <i>z<sub>s</sub></i>",
-    eq2Label: "Helmholtz free-energy functional (diffuse interface)",
-    eq2: "<i>F</i>[\u03c1] = \u222b [ <i>f</i>\u2080(\u03c1) + (\u03ba/2)|\u2207\u03c1|\u00b2 ] d<i>V</i>",
+    eq: "\u03c3(<i>R</i>) = \u03c3<sub>\u221e</sub> / (1 + 2\u03b4/<i>R</i> + \u2026), \u2003 \u03b4 = <i>z<sub>e</sub></i> \u2212 <i>z<sub>s</sub></i>",
+    eq2Label: "Generalized Young\u2013Laplace (from Helmholtz work of formation)",
+    eq2: "\u0394<i>p</i> = 2\u03b3(<i>R</i>)/<i>R</i> + d\u03b3/d<i>R</i> \u2003\u27f6\u2003 \u0394<i>p</i> = 2\u03c3<sub>t</sub>/<i>R<sub>t</sub></i> &nbsp;(at the surface of tension)",
+    eq3Label: "Diffuse interface: Helmholtz free-energy functional",
+    eq3: "<i>F</i>[\u03c1] = \u222b [ <i>f</i>\u2080(\u03c1) + (\u03ba/2)|\u2207\u03c1|\u00b2 ] d<i>V</i>",
     fig: FIG_TOLMAN,
-    figCap: "Sharp step assumed by the capillarity approximation (dashed) vs the real diffuse profile (solid). \u03b4 is the offset between the two dividing surfaces."
+    figCap: "Sharp step assumed by the capillarity approximation (dashed) vs the real diffuse profile (solid). \u03b4 is the offset between the two dividing surfaces.",
+    ref: "R. C. Tolman, \u201cThe effect of droplet size on surface tension,\u201d <i>J. Chem. Phys.</i> <b>17</b>, 333\u2013337 (1949), doi:10.1063/1.1747247. Framework: V. I. Kalikmanov, <i>Nucleation Theory</i>, Lecture Notes in Physics <b>860</b>, Springer (2013)."
   },
   {
     year: "1970\u201392",
     who: "Skripov & Baidakov",
     tag: "Cryogenic experiments",
     title: "Skripov & Baidakov — CNT meets cryogenic data",
-    body: `<p>Systematic superheat-limit experiments on cryogenic liquids provide the decisive test, and also justify the homogeneous framework: for contact angles \u03b8 < 68\u00b0, heterogeneous nucleation is negligible at rates <i>J</i> \u2273 10\u00b3 m\u207b\u00b3s\u207b\u00b9 \u2014 and cryogens wet common materials almost completely (\u03b8 < 10\u00b0 for N\u2082 and O\u2082, \u03b8 \u2248 0\u00b0 for H\u2082), with low dissolved-gas content.</p>
-    <p>Predicted superheat temperatures differ from measurements by about <em>2.4%</em>; including the Tolman curvature correction (\u03c3 of the critical nucleus 5\u20137% below planar) brings theory and experiment into agreement within their combined uncertainties. At low rates (<i>J</i> < 1.5\u00d710\u2076 m\u207b\u00b3s\u207b\u00b9) measured rates deviate \u2014 attributed to <em>ionising radiation</em>: cosmic rays and natural radioactivity seed vapour nuclei in the superheated liquid.</p>`,
+    body: `<p>Systematic superheat-limit experiments on cryogenic liquids provide the decisive test of CNT and justify the <em>homogeneous</em> framework: cryogens wet common materials almost completely and carry little dissolved gas, so heterogeneous nucleation is negligible at the measured rates. The table collects the quantitative outcome \u2014 uncorrected CNT is already close, and the Tolman curvature correction closes the residual gap. The deviation at low rates is not a failure of CNT but an external seeding channel: ionising radiation (cosmic rays, natural radioactivity) nucleates vapour in the superheated liquid.</p>`,
+    tableLabel: "Cryogenic superheat-limit tests \u2014 what the data show",
+    table: "<tr><td>Wetting (N\u2082, O\u2082)</td><td>\u03b8 &lt; 10\u00b0 \u2014 near-complete wetting</td></tr>"
+      + "<tr><td>Wetting (H\u2082)</td><td>\u03b8 \u2248 0\u00b0</td></tr>"
+      + "<tr><td>Heterogeneous route</td><td>negligible for \u03b8 &lt; 68\u00b0 at <i>J</i> \u2273 10\u00b3 m\u207b\u00b3s\u207b\u00b9</td></tr>"
+      + "<tr><td>Standard CNT vs expt.</td><td>superheat limit within \u2248 <b>2.4%</b></td></tr>"
+      + "<tr><td>+ Tolman correction</td><td>\u03c3* is 5\u20137% below \u03c3<sub>\u221e</sub> \u2192 agreement within uncertainty</td></tr>"
+      + "<tr><td>Low-rate anomaly</td><td><i>J</i> &lt; 1.5\u00d710\u2076 m\u207b\u00b3s\u207b\u00b9: ionising radiation seeds nuclei</td></tr>",
     eqLabel: "Residual accuracy of corrected CNT",
-    eq: "superheat limit: theory vs experiment \u2248 2.4%"
+    eq: "superheat limit: theory vs experiment \u2248 2.4%",
+    ref: "V. G. Baidakov, <i>Explosive Boiling of Superheated Cryogenic Liquids</i>, Wiley-VCH (2007), doi:10.1002/9783527610662; V. P. Skripov, <i>Metastable Liquids</i>, Wiley (1974)."
   },
   {
     year: "1995\u201398",
@@ -532,17 +641,21 @@ const EVENTS = [
     body: `<p>The isothermal approximation breaks down for small clusters: the <em>latent heat</em> released by each molecular attachment is comparable to the cluster's own energy fluctuations. McGraw & LaViolette therefore extend the Fokker\u2013Planck description with the cluster <em>energy as a second state variable</em>, deriving a corrected evaporation rate that satisfies detailed balance.</p>
     <p>Reguera & Rub\u00ed address the complementary limit of high supersaturation, where clusters grow faster than they equilibrate: deriving the drift and diffusion coefficients from <em>non-equilibrium thermodynamics</em> restores consistency with the equilibrium distribution. These thermal corrections matter for cryogenic fluids, where latent-heat effects are relatively strong and may contribute to the observed deviations at low nucleation rates.</p>`,
     eqLabel: "Energy becomes a state variable",
-    eq: "<i>f</i>(<i>n</i>, <i>t</i>) \u27f6 <i>f</i>(<i>n</i>, <i>E</i>, <i>t</i>)"
+    eq: "<i>f</i>(<i>n</i>, <i>t</i>) \u27f6 <i>f</i>(<i>n</i>, <i>E</i>, <i>t</i>)",
+    eq2Label: "Non-isothermal rate correction",
+    eq2: "<i>J</i><sub>non-iso</sub> = <i>J</i><sub>iso</sub> \u00b7 <i>b</i>\u00b2/(<i>b</i>\u00b2 + <i>q</i>\u00b2), \u2003 <i>q</i> = latent-heat/thermal-coupling ratio",
+    ref: "R. McGraw & R. A. LaViolette, \u201cFluctuations, temperature, and detailed balance in classical nucleation theory,\u201d <i>J. Chem. Phys.</i> <b>102</b>, 8983 (1995), doi:10.1063/1.468952. D. Reguera & J. M. Rub\u00ed, \u201cNonequilibrium translational\u2013rotational effects in nucleation,\u201d <i>J. Chem. Phys.</i> <b>115</b>, 7100 (2001), doi:10.1063/1.1405122."
   },
   {
-    year: "2015",
-    who: "Schweizer & \u00d6ttinger",
+    year: "2014",
+    who: "Schweizer & Sagis",
     tag: "Unified extension",
-    title: "Schweizer & \u00d6ttinger — a unified mesoscopic nucleation theory",
-    body: `<p>The corrections accumulated over the century \u2014 non-equilibrium kinetics, thermal effects, inertia \u2014 are unified in a framework that describes the nucleus through <em>three coupled state variables</em>: size, momentum, and energy.</p>
-    <p>Derived from thermodynamic first principles using the GENERIC formalism, the approach maps atomistic details onto an extended mesoscopic Fokker\u2013Planck equation. It reduces the 3\u20135 orders-of-magnitude discrepancy between standard CNT predictions and molecular-dynamics results \u2014 setting the accuracy standard that mesoscopic nucleation models must meet.</p>`,
+    title: "Schweizer & Sagis — a unified non-equilibrium nucleation theory",
+    body: `<p>The corrections accumulated over the century \u2014 non-equilibrium kinetics, thermal effects, inertia \u2014 are unified in a framework that describes the nucleus through <em>coupled state variables</em>: size together with momentum and energy.</p>
+    <p>Derived from thermodynamic first principles using the <em>GENERIC</em> formalism (H. C. \u00d6ttinger), the approach maps atomistic details onto an extended mesoscopic Fokker\u2013Planck equation. It targets the 3\u20135 orders-of-magnitude discrepancy between standard CNT predictions and molecular-dynamics results \u2014 setting the accuracy standard that mesoscopic nucleation models must meet.</p>`,
     eqLabel: "Extended cluster state",
-    eq: "<i>f</i>(<i>n</i>, <i>t</i>) \u27f6 <i>f</i>(<i>n</i>, <i>p</i>, <i>E</i>, <i>t</i>)"
+    eq: "<i>f</i>(<i>n</i>, <i>t</i>) \u27f6 <i>f</i>(<i>n</i>, <i>p</i>, <i>E</i>, <i>t</i>)",
+    ref: "M. Schweizer & L. M. C. Sagis, \u201cNonequilibrium thermodynamics of nucleation,\u201d <i>J. Chem. Phys.</i> <b>141</b>, 224102 (2014), doi:10.1063/1.4902885. Formalism: H. C. \u00d6ttinger, <i>Beyond Equilibrium Thermodynamics</i>, Wiley (2005)."
   }
 ];
 
@@ -578,12 +691,17 @@ function select(i){
 
   let aside = `<div class="eq"><span class="lbl">${ev.eqLabel}</span>${ev.eq}</div>`;
   if(ev.eq2) aside += `<div class="eq"><span class="lbl">${ev.eq2Label}</span>${ev.eq2}</div>`;
+  if(ev.eq3) aside += `<div class="eq"><span class="lbl">${ev.eq3Label}</span>${ev.eq3}</div>`;
+  if(ev.table) aside += `<div class="dtable"><span class="lbl">${ev.tableLabel || ""}</span><table><tbody>${ev.table}</tbody></table></div>`;
   if(ev.fig) aside += `<div class="fig">${ev.fig}<div class="cap">${ev.figCap || ""}</div></div>`;
+
+  const refHtml = ev.ref ? `<div class="ref"><span class="rlbl">Reference</span>${ev.ref}</div>` : "";
 
   panel.innerHTML = `
     <h2>${ev.title} <span class="tag">${ev.tag}</span></h2>
     <div class="body">${ev.body}</div>
-    <div class="aside">${aside}</div>`;
+    <div class="aside">${aside}</div>
+    ${refHtml}`;
 }
 
 document.getElementById("prev").addEventListener("click", ()=>select(current-1));
