@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study C — Bubble departure benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['$$','$$']]},svg:{fontCache:'global'}};</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{
+  --head:#0D2659;      /* DarkBlue  — headings/structure */
+  --blue:#045073;      /* MediumBlue */
+  --blue-mut:#EBEBF7;  /* MutedBlue */
+  --red:#EC5858;       /* MediumRed */
+  --red-mut:#F7EBEB;   /* MutedRed */
+  --green:#5EB3A8;     /* MediumGreen */
+  --green-mut:#EBF7EB; /* MutedGreen */
+  --black:#384259;     /* MediumBlack */
+  --ink:#1B2233; --muted:#4a5468; --line:#C7D0E0; --bg:#FFFFFF; --panel:#F5F7FB;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  font-weight:400; line-height:1.55;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:34px 52px 70px;}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);}
+/* frametitle: bold heading + rule underneath (SimplePlus) */
+h1{font-weight:700;font-size:clamp(26px,3vw,37px);color:var(--head);line-height:1.14;margin:6px 0 0;
+   padding-bottom:10px;border-bottom:2px solid var(--head);}
+h1 .warm{color:var(--red);}
+.lede{color:var(--muted);font-size:clamp(15px,1.35vw,17px);max-width:820px;margin:14px 0 4px;}
+.content{margin-top:22px;}
+.content > p{margin:0 0 13px;}
+.content ul{margin:6px 0 15px 20px;} .content li{margin:6px 0;}
+/* inline structure label */
+.tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.03em;
+  color:#fff;background:var(--blue);border-radius:5px;padding:2px 9px;margin:0 4px 3px 0;}
+.tag.warm{background:var(--red);}
+/* SimplePlus block: colored title bar + muted body, rounded, no shadow */
+.block{border-radius:8px;overflow:hidden;margin:16px 0;border:1px solid var(--line);}
+.block > .bt{background:var(--blue);color:#fff;font-weight:600;font-size:15px;padding:8px 15px;}
+.block > .bb{background:var(--blue-mut);padding:13px 15px;font-size:14.5px;color:var(--ink);}
+.block.alert > .bt{background:var(--red);} .block.alert > .bb{background:var(--red-mut);}
+.block.ex > .bt{background:var(--green);} .block.ex > .bb{background:var(--green-mut);}
+.block .bb ul{margin:6px 0 2px 20px;} .block .bb li{margin:5px 0;}
+/* section heading bar (structure color, like a block title used as a divider) */
+.sec{display:block;background:var(--blue);color:#fff;font-weight:600;font-size:15px;
+  padding:7px 15px;border-radius:8px;margin:22px 0 12px;}
+.sec.warm{background:var(--red);}
+/* equation panel */
+.eq{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--blue);
+  border-radius:6px;padding:10px 16px;margin:12px 0;overflow-x:auto;}
+.ref{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--muted);margin-top:8px;}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 18px;margin:12px 0;font-size:14px;}
+.kv dt{font-family:"IBM Plex Mono",monospace;color:var(--blue);white-space:nowrap;} .kv dd{color:var(--ink);}
+figure{margin:16px 0;} figure img{width:100%;border:1px solid var(--line);border-radius:8px;background:#fff;}
+figcaption{font-size:13px;color:var(--muted);margin-top:8px;text-align:center;}
+/* pseudocode — dark panel keyed to DarkBlue */
+.codehdr{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--blue);
+  letter-spacing:.05em;text-transform:uppercase;margin:18px 0 3px;}
+pre.code{background:var(--head);color:#E7EEF7;border-radius:8px;padding:18px 20px;margin:12px 0;
+  font-family:"IBM Plex Mono",monospace;font-size:13px;line-height:1.6;overflow-x:auto;}
+pre.code .kw{color:#7FC6E8;} pre.code .cm{color:#8598ad;font-style:italic;}
+pre.code .fn{color:#F3C969;} pre.code .op{color:#EC8E6B;}
+footer{margin-top:36px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+
+.lead{font-weight:600;color:var(--head);margin:2px 0 10px;}
+ul.keys{margin:6px 0 16px 0;list-style:none;}
+ul.keys li{margin:7px 0;padding-left:20px;position:relative;}
+ul.keys li::before{content:"";position:absolute;left:2px;top:9px;width:7px;height:7px;
+  border-radius:2px;background:var(--blue);}
+ul.keys li.warm::before{background:var(--red);}
+
+
+.figbox{position:relative;width:100%;max-width:720px;margin:8px auto 2px;aspect-ratio:760/410;
+  font-family:"Latin Modern Roman","CMU Serif",Georgia,"Times New Roman",serif;}
+.figshapes{position:absolute;inset:0;width:100%;height:100%;}
+.lbl{position:absolute;font-size:1.02vw;color:#111;white-space:nowrap;}
+@media(min-width:720px){.lbl{font-size:15px;}}
+.lbl.lc{transform:translate(-50%,-50%);} .lbl.ll{transform:translate(0,-50%);}
+.bc{position:absolute;font-family:"IBM Plex Mono",monospace;font-size:12px;color:#045073;
+  white-space:nowrap;font-weight:500;}
+.bc.lc{transform:translate(-50%,-50%);} .bc.ll{transform:translate(0,-50%);}
+.fieldbtns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0 2px;}
+.fieldbtns button{font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;padding:7px 16px;
+  border-radius:999px;border:1.5px solid var(--blue);background:#fff;color:var(--blue);transition:all .12s;}
+.fieldbtns button:hover{background:var(--blue-mut);}
+.fieldbtns button.active{background:var(--blue);color:#fff;}
+.caphint{text-align:center;font-size:12.5px;color:var(--muted);margin:4px 0 20px;}
+</style></head><body><div class="wrap">
+<span class="eyebrow">Study C &middot; Assessing the continuum solver</span>
+<h1>Bubble departure benchmark</h1>
+<div class="content">
+<p class="lead">Study C is where we understand the continuum side of the coupling: how a <strong>volume-of-fluid (VOF)</strong> solver defines the liquid–vapour interface, how <strong>surface tension</strong> is modelled on that diffuse interface, where its <strong>spurious currents</strong> come from, and what the solver is <strong>missing</strong> for the coupling role. The vehicle is <code>interThermalPhaseChangeFoam</code> run on a bubble-departure benchmark — the saturated ethanol pool-boiling experiment of Kaniowski (2018).</p>
+
+<span class="sec">The case, reduced to one cavity</span>
+<ul class="keys">
+  <li>The microchannel surface (MC-0.3-0.2-0.6) is reduced to a <strong>single nucleation site</strong> — one axisymmetric cavity, revolved about the axis into a thin 5° wedge, preserving the 3D volume scaling of an isolated bubble.</li>
+  <li>The cavity is initialised as <strong>vapour</strong>, the pool as saturated liquid — a pre-existing liquid–vapour interface for the phase-change model to act on.</li>
+  <li>Wall superheat is imposed <strong>directly</strong> as a fixed temperature (ΔT = 5 K); conjugate heat transfer in the solid is not resolved.</li>
+  <li>Phase change: interface-equilibrium closure; surface tension: smoothed continuum-surface-force (Brackbill 1992); interface advection: vanLeer + MULES.</li>
+</ul>
+
+<span class="sec">Computational domain</span>
+<div class="figbox">
+<svg class="figshapes" viewBox="0 0 760 410" preserveAspectRatio="xMidYMid meet">
+  <rect x="150" y="55" width="280" height="110" fill="#E9ECF7"/>
+  <rect x="150" y="165" width="85" height="85" fill="#F0A9A0"/>
+  <path d="M150,55 L430,55 L430,165 L235,165 L235,250 L150,250 Z" fill="none" stroke="#1a2a4a" stroke-width="1.6"/>
+  <line x1="150" y1="50" x2="150" y2="255" stroke="#555" stroke-width="1.2" stroke-dasharray="7 4"/>
+  <line x1="255" y1="165" x2="255" y2="250" stroke="#1a2a4a" stroke-width="1"/>
+  <polygon points="255,165 251,174 259,174" fill="#1a2a4a"/>
+  <polygon points="255,250 251,241 259,241" fill="#1a2a4a"/>
+  <line x1="150" y1="300" x2="235" y2="300" stroke="#1a2a4a" stroke-width="1"/>
+  <polygon points="150,300 159,296 159,304" fill="#1a2a4a"/>
+  <polygon points="235,300 226,296 226,304" fill="#1a2a4a"/>
+  <polygon points="600,112 712,92 712,190 600,208" fill="#C6CBD6" stroke="#1a2a4a" stroke-width="1.1"/>
+  <polygon points="700,130 712,92 712,190 700,228" fill="#D3D8E1" stroke="#1a2a4a" stroke-width="1.1"/>
+  <polygon points="600,112 700,130 700,228 600,208" fill="#E7EAF1" stroke="#1a2a4a" stroke-width="1.4"/>
+  <polygon points="600,180 626,183 626,208 600,208" fill="#F0A9A0" stroke="#1a2a4a" stroke-width="0.7"/>
+  <line x1="600" y1="112" x2="600" y2="208" stroke="#1a2a4a" stroke-width="1.6"/>
+  <line x1="585" y1="104" x2="585" y2="216" stroke="#555" stroke-width="1.2" stroke-dasharray="6 3"/>
+</svg>
+  <span class="lbl lc" style="left:38.158%;top:10.244%">\(\text{Top (open)}\)</span>
+  <span class="lbl lc" style="left:38.158%;top:20.976%">\(\alpha_1 = 1\)</span>
+  <span class="lbl lc" style="left:38.158%;top:26.829%">\(\text{liquid pool}\)</span>
+  <span class="lbl lc" style="left:38.158%;top:31.707%">\(T = T_{\mathrm{sat}}\)</span>
+  <span class="lbl lc" style="left:15.263%;top:36.585%">\(\text{Axis}\)</span>
+  <span class="lbl ll" style="left:61.842%;top:28.293%">\(\text{FarStream}\)</span>
+  <span class="lbl ll" style="left:61.842%;top:33.415%">\(\text{(open)}\)</span>
+  <span class="lbl lc" style="left:44.079%;top:38.049%">\(\text{Base}\quad \theta = 13.4^\circ\)</span>
+  <span class="lbl lc" style="left:25.263%;top:48.537%">\(\text{vapour seed}\)</span>
+  <span class="lbl lc" style="left:25.263%;top:53.659%">\(\alpha_1 = 0\)</span>
+  <span class="lbl lc" style="left:39.737%;top:50.732%">\(h = 200\ \mu\text{m}\)</span>
+  <span class="lbl lc" style="left:25.263%;top:65.366%">\(\text{Cavity}\)</span>
+  <span class="lbl lc" style="left:25.263%;top:70.000%">\(\text{imposed } \Delta T = 5\ \text{K}\)</span>
+  <span class="lbl lc" style="left:25.263%;top:77.561%">\(w/2 = 150\ \mu\text{m}\)</span>
+  <span class="lbl lc" style="left:82.500%;top:58.537%">\(\text{FrontNBack faces}\)</span>
+  <span class="bc lc" id="bc_top" style="left:38.158%;top:16.098%"></span>
+  <span class="bc lc" id="bc_base" style="left:44.079%;top:43.415%"></span>
+  <span class="bc ll" id="bc_farstream" style="left:61.842%;top:38.049%"></span>
+  <span class="bc lc" id="bc_cavity" style="left:25.263%;top:58.049%"></span>
+  <span class="bc lc" id="bc_frontnback" style="left:82.500%;top:62.927%"></span>
+</div>
+<div class="fieldbtns">
+  <button data-f="u">u</button>
+  <button data-f="p_rgh">p_rgh</button>
+  <button data-f="T">T</button>
+  <button data-f="alpha">&#945;&#8321;</button>
+</div>
+
+<span class="sec">Key parameters (saturated ethanol, 101.3 kPa)</span>
+<dl class="kv">
+  <dt>Working fluid</dt><dd>ethanol; \(T_{\mathrm{sat}}=351.45\ \mathrm{K}\), \(\rho_l=757\), \(\rho_v=1.43\ \mathrm{kg\,m^{-3}}\)</dd>
+  <dt>Surface tension / latent heat</dt><dd>\(\sigma=0.0177\ \mathrm{N\,m^{-1}}\), \(h_{lv}=963\times10^{3}\ \mathrm{J\,kg^{-1}}\)</dd>
+  <dt>Contact angle / capillary length</dt><dd>\(\theta=13.4^\circ\) (static, ethanol–copper); \(L_{\mathrm{cap}}=1.55\ \mathrm{mm}\)</dd>
+  <dt>Vapour seed</dt><dd>\(150\times200\ \mu\mathrm{m}\) (\(r\times y\), full cavity)</dd>
+  <dt>Wall superheat</dt><dd>\(\Delta T = 5\ \mathrm{K}\)</dd>
+  <dt>Mesh</dt><dd>36,368 cells; run to \(t_{\mathrm{end}}=0.5\ \mathrm{s}\)</dd>
+</dl>
+</div>
+</div>
+
+<script>
+const BC = {
+  u:      {top:"pressureInletOutlet", farstream:"pressureInletOutlet", base:"noSlip", cavity:"noSlip", frontnback:"wedge"},
+  p_rgh:  {top:"totalPressure (p\u2080=0)", farstream:"zeroGradient", base:"fixedFluxPressure", cavity:"fixedFluxPressure", frontnback:"wedge"},
+  T:      {top:"inletOutlet (0)", farstream:"inletOutlet (0)", base:"fixedValue (5 K)", cavity:"fixedValue (5 K)", frontnback:"wedge"},
+  alpha:  {top:"inletOutlet (1)", farstream:"inletOutlet (1)", base:"constantAlphaContactAngle (13.4\u00b0)", cavity:"fixedValue (0)", frontnback:"wedge"}
+};
+let current = null;
+function clearBC(){ ["top","base","farstream","cavity","frontnback"].forEach(k=>document.getElementById("bc_"+k).textContent=""); }
+function setField(f){
+  if (current===f){ current=null; clearBC(); document.querySelectorAll(".fieldbtns button").forEach(b=>b.classList.remove("active")); return; }
+  current=f; const m=BC[f];
+  ["top","base","farstream","cavity","frontnback"].forEach(k=>document.getElementById("bc_"+k).textContent=m[k]);
+  document.querySelectorAll(".fieldbtns button").forEach(b=>b.classList.toggle("active", b.dataset.f===f));
+}
+document.querySelectorAll(".fieldbtns button").forEach(b=>b.addEventListener("click",()=>setField(b.dataset.f)));
+</script>
+
+</body></html>
