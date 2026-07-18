@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study B — From SI to the LJ reduced-unit</title>
+<script>
+  MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+             svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  :root{
+    --ubc-blue:#002145; --ubc-mid:#0055b7; --accent:#0a7d7d; --red:#b30000;
+    --ink:#1c2530; --muted:#54606d; --line:#e2e6ec; --tealbg:#eef5f5;
+    --card:#ffffff; --bg:#f5f7fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  header.hero{background:linear-gradient(135deg,var(--ubc-blue),#04366b);color:#fff;
+    padding:38px 26px 32px;text-align:center;}
+  header.hero .kicker{letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;
+    color:#9fc0e8;margin-bottom:12px;}
+  header.hero h1{margin:0;font-size:1.7rem;font-weight:700;line-height:1.2;}
+  main{max-width:1040px;margin:0 auto;padding:22px 22px 70px;}
+  .layout{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;}
+  @media(max-width:820px){.layout{grid-template-columns:1fr;}}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;box-shadow:0 1px 3px rgba(16,30,54,.05);}
+  section h2{color:var(--ubc-blue);font-size:1.12rem;margin:0 0 12px;border-left:5px solid var(--ubc-mid);
+    padding-left:12px;}
+  p{margin:10px 0;font-size:.94rem;}
+  .hl{color:var(--accent);font-weight:600;}
+  .eqcard{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:6px 16px;margin:12px 0;
+    overflow-x:auto;overflow-y:hidden;}
+  .eqcard.scales{background:var(--tealbg);border-color:#d6e6e6;}
+  .caption{font-size:.82rem;color:var(--muted);margin:-2px 0 8px;padding-left:4px;}
+  .block{margin:4px 0 16px;border:1px solid #9bbbe6;border-radius:10px;overflow:hidden;}
+  .block .bt{background:var(--ubc-blue);color:#fff;font-weight:700;font-size:.95rem;padding:9px 14px;}
+  .block .bb{background:#eef2f8;padding:12px 14px;font-size:.9rem;}
+  .block .bb b{color:var(--ubc-blue);}
+  ul.pts{list-style:none;padding:0;margin:8px 0 0;}
+  ul.pts li{position:relative;padding:10px 12px 10px 26px;margin-bottom:10px;
+    border-left:3px solid var(--accent);background:#f8fafc;border-radius:0 8px 8px 0;font-size:.9rem;}
+  ul.pts li::before{content:"";position:absolute;left:9px;top:16px;width:7px;height:7px;border-radius:50%;
+    background:var(--accent);}
+  .redword{color:var(--red);font-weight:600;}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:24px;border-top:1px solid var(--line);margin-top:8px;}
+  .brand{color:var(--ubc-blue);font-weight:600;letter-spacing:.06em;font-size:.78rem;text-transform:uppercase;margin-top:8px;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="kicker">Candidacy Examination &middot; Study B</div>
+  <h1>From SI to the LJ reduced-unit</h1>
+</header>
+
+<main>
+<div class="layout">
+
+  <!-- left column: reduced units -->
+  <section>
+    <h2>Reduced units of the LJ fluid</h2>
+    <p>The previous step ties the <em>lattice</em> model to the Lennard-Jones reference
+       fluid&rsquo;s own units. The LJ fluid is <span class="hl">dimensionless</span> in three
+       molecular scales:</p>
+    <div class="eqcard scales">\[ \sigma\ (\text{length}),\quad \varepsilon\ (\text{energy}),\quad m\ (\text{mass}) \]</div>
+    <p>so every quantity has a reduced form:</p>
+    <div class="eqcard">\[ T^{*}=\frac{k_BT}{\varepsilon},\quad \rho^{*}=n\,\sigma^{3},\quad p^{*}=\frac{p\,\sigma^{3}}{\varepsilon} \]</div>
+    <div class="eqcard">\[ t^{*}=\frac{t}{\tau_{\mathrm{LJ}}},\qquad \tau_{\mathrm{LJ}}=\sigma\sqrt{m/\varepsilon} \]</div>
+    <p>The MBWR closure and the MD reference rate are both stated in these reduced units.</p>
+  </section>
+
+  <!-- right column: argon convention + SI rate -->
+  <section>
+    <h2>Recovering SI units</h2>
+    <div class="block">
+      <div class="bt">The LJ&ndash;argon convention</div>
+      <div class="bb">
+        Give \(\sigma,\varepsilon,m\) the values of <b>argon</b> &mdash; the three numbers that fix
+        every SI scale. Argon is used because its monatomic structure is a single-site LJ fluid.
+      </div>
+    </div>
+    <p>The extracted <span class="redword">reduced</span> rate then becomes SI:</p>
+    <div class="eqcard">\[ J \;=\; \frac{J^{*}}{\sigma^{3}\,\tau_{\mathrm{LJ}}}\quad[\mathrm{m^{-3}\,s^{-1}}] \]</div>
+    <ul class="pts">
+      <li><b>Benchmark target</b> (Diemand 2014):
+          \(J\approx 10^{27}\!-\!10^{31}\ \mathrm{m^{-3}\,s^{-1}}\)
+          over \(T/T_c\approx 0.85\!-\!0.95\).</li>
+    </ul>
+  </section>
+
+</div>
+</main>
+
+<footer>
+  <div class="brand">The University of British Columbia &middot; Okanagan Campus</div>
+  <div style="margin-top:6px">Study B &mdash; From SI to the LJ reduced-unit</div>
+</footer>
+</body>
+</html>
