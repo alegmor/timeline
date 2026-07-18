@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study B — Multipseudopotential approach</title>
+<script>
+  MathJax = { tex: { inlineMath: [['\\(','\\)']], displayMath: [['\\[','\\]']] },
+             svg: { fontCache: 'global' } };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+  :root{
+    --ubc-blue:#002145; --ubc-mid:#0055b7; --accent:#0a7d7d; --red:#b30000;
+    --ink:#1c2530; --muted:#54606d; --line:#e2e6ec; --tealbg:#eef5f5;
+    --card:#ffffff; --bg:#f5f7fa;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+  header.hero{background:linear-gradient(135deg,var(--ubc-blue),#04366b);color:#fff;
+    padding:42px 26px 36px;text-align:center;}
+  header.hero .kicker{letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;
+    color:#9fc0e8;margin-bottom:12px;}
+  header.hero h1{margin:0 0 8px;font-size:1.75rem;font-weight:700;line-height:1.2;}
+  header.hero p{margin:6px auto 0;max-width:640px;color:#cfe0f2;font-size:.98rem;}
+  main{max-width:900px;margin:0 auto;padding:22px 22px 70px;}
+  section{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:26px 32px;margin:22px 0;box-shadow:0 1px 3px rgba(16,30,54,.05);}
+  section h2{color:var(--ubc-blue);font-size:1.25rem;margin:0 0 4px;border-left:5px solid var(--ubc-mid);
+    padding-left:14px;}
+  section .sub{color:var(--muted);font-size:.86rem;margin:0 0 14px;padding-left:19px;}
+  .eqcard{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:6px 18px;margin:14px 0;
+    overflow-x:auto;overflow-y:hidden;}
+  .eqcard mjx-container{max-width:100%;}
+  p{margin:10px 0;}
+  .terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px;}
+  .term{background:var(--tealbg);border:1px solid #d6e6e6;border-radius:10px;padding:12px 14px;}
+  .term .name{font-weight:700;color:var(--ubc-blue);font-size:.92rem;margin-bottom:4px;}
+  .term.noise{background:#fbeaea;border-color:#e6c4c4;}
+  .term.noise .name{color:var(--red);}
+  .term p{margin:0;font-size:.86rem;color:var(--muted);}
+  .callout{border-left:3px solid var(--accent);background:#f8fafc;border-radius:0 8px 8px 0;
+    padding:12px 16px;margin-top:14px;}
+  .callout b{color:var(--ubc-blue);}
+  .knob{color:var(--accent);font-weight:600;}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:24px;border-top:1px solid var(--line);}
+  .brand{color:var(--ubc-blue);font-weight:600;letter-spacing:.06em;font-size:.78rem;text-transform:uppercase;margin-top:8px;}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="kicker">Candidacy Examination &middot; Study B</div>
+  <h1>Multipseudopotential approach</h1>
+</header>
+
+<main>
+
+<section id="evolution">
+  <h2>1. Evolution equation</h2>
+  <p class="sub">One lattice Boltzmann update, split into four physical roles.</p>
+  <div class="eqcard">\[
+    \underbrace{f_i(\mathbf{x}+\mathbf{c}_i\Delta t,\,t+\Delta t) - f_i(\mathbf{x},t)}_{\text{streaming}}
+    \;=\;
+    \underbrace{\omega\,\Omega^{(\mathrm{BGK})}(f_i)}_{\text{collision}}
+    \;+\;
+    \underbrace{S_i(\mathbf{x},t)}_{\text{forcing}}
+    \;+\;
+    \underbrace{\textcolor{#b30000}{\eta_i(\mathbf{x},t)}}_{\textcolor{#b30000}{\text{thermal noise}}}
+  \]</div>
+  <div class="terms">
+    <div class="term"><div class="name">Streaming</div><p>Populations hop along the lattice links to neighbouring sites.</p></div>
+    <div class="term"><div class="name">Collision</div><p>BGK relaxation of \(f_i\) toward local equilibrium.</p></div>
+    <div class="term"><div class="name">Forcing</div><p>Injects the Shan&ndash;Chen attraction \(S_i\) that drives phase separation.</p></div>
+    <div class="term noise"><div class="name">Thermal noise</div><p>Stochastic term \(\eta_i\) &mdash; present only in the fluctuating extension (Study B).</p></div>
+  </div>
+</section>
+
+<section id="force">
+  <h2>2. The Shan&ndash;Chen force</h2>
+  <p class="sub">Each site attracts its neighbours; the strength is set by the &ldquo;stickiness&rdquo; \(\psi(n)\).</p>
+  <div class="eqcard">\[
+    \mathbf{F}^{SC}(\mathbf{x}) = -G\,\psi(\mathbf{x})
+      \sum_i w_i\,\psi(\mathbf{x}+\mathbf{c}_i\Delta t)\,\mathbf{c}_i
+  \]</div>
+  <p>The coupling constant \(G\) sets the interaction strength (with \(G<0\) giving cohesion), and
+     \(\psi(\mathbf{x})\) is the pseudopotential evaluated from the local density. Summing over the
+     lattice directions \(\mathbf{c}_i\) with weights \(w_i\) produces a net attraction toward
+     denser neighbours &mdash; the microscopic origin of surface tension.</p>
+</section>
+
+<section id="eos">
+  <h2>3. How to introduce a real equation of state</h2>
+  <p class="sub">The lattice pressure that \(\psi\) generates, term by term.</p>
+  <div class="eqcard">\[
+    P_N(x) = \underbrace{n c_s^2}_{\text{ideal gas}}
+    + \underbrace{\tfrac{G c_s^2 e_2}{2}\psi^2}_{\text{non-ideal bulk (the EOS)}}
+    + \underbrace{G c_s^4\Big[\bar\alpha\big(\tfrac{d\psi}{dx}\big)^2
+      + \bar\beta\,\psi\tfrac{d^2\psi}{dx^2}\Big]}_{\text{interface: surface tension}}
+  \]</div>
+  <div class="terms">
+    <div class="term"><div class="name">Ideal gas</div><p>\(n c_s^2\) &mdash; the baseline lattice pressure.</p></div>
+    <div class="term"><div class="name">Non-ideal bulk</div><p>\(\tfrac{G c_s^2 e_2}{2}\psi^2\) &mdash; the term that makes the fluid non-ideal: the EOS.</p></div>
+    <div class="term"><div class="name">Interface</div><p>Gradient terms setting surface tension; <span class="knob">\(\bar\alpha,\bar\beta\)</span> are Lulli&rsquo;s tunable knobs.</p></div>
+  </div>
+  <div class="callout">
+    <p><b>Multipseudopotential (MPI).</b> A single consistent \(\psi\) is too rigid to reproduce a real
+       fluid. Superposing several pseudopotentials gives</p>
+    <div class="eqcard" style="background:#fff">\[
+      P_b = n c_s^2 + \tfrac{c_s^2 e_2}{2}\sum_i G_i\,\psi_i^2(n),
+      \qquad
+      \psi_i(n)=\Big(\tfrac{n}{\varepsilon_i+n}\Big)^{1/\varepsilon_i},
+    \]</div>
+    <p>choosing the set \(\{G_i,\varepsilon_i\}\) so that the sum matches a chosen (arbitrary) equation of state.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="brand">The University of British Columbia &middot; Okanagan Campus</div>
+  <div style="margin-top:6px">Study B &mdash; Multipseudopotential approach (single-component SC-LBM)</div>
+</footer>
+</body>
+</html>
