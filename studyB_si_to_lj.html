@@ -98,7 +98,10 @@
     <p>so every quantity has a reduced form:</p>
     <div class="eqcard">\[ T^{*}=\frac{k_BT}{\varepsilon},\quad \rho^{*}=\rho\,\sigma^{3},\quad p^{*}=\frac{p\,\sigma^{3}}{\varepsilon} \]</div>
     <div class="eqcard">\[ t^{*}=\frac{t}{\tau_{\mathrm{LJ}}},\qquad \tau_{\mathrm{LJ}}=\sigma\sqrt{m/\varepsilon} \]</div>
-    <p>The MBWR closure and the MD reference rate are both stated in these reduced units.</p>
+    <p>The MBWR closure and the MD reference rate are both stated in these reduced units.
+       <b>All the simulation scales in Study&nbsp;B and Study&nbsp;D &mdash; domain size, density,
+       temperature, and time &mdash; are defined this way</b>, in units of \(\sigma\), \(\varepsilon\)
+       and \(m\).</p>
   </section>
 
   <!-- right column: argon convention + SI rate -->
@@ -108,7 +111,14 @@
       <div class="bt">The LJ&ndash;argon convention</div>
       <div class="bb">
         Give \(\sigma,\varepsilon,m\) the values of <b>argon</b> &mdash; the three numbers that fix
-        every SI scale. Argon is used because its monatomic structure is a single-site LJ fluid.
+        every SI scale. Argon is used because its monatomic, non-polar atom is almost a perfect
+        single-site LJ fluid, which is why it is the standard reference for nucleation studies.
+        <div class="eqcard" style="margin-top:10px">\[
+          \sigma_{\mathrm{Ar}} \approx 0.34\ \mathrm{nm},\qquad
+          \varepsilon_{\mathrm{Ar}}/k_B \approx 120\ \mathrm{K}
+        \]</div>
+        So a domain quoted as \(100\,\sigma\) is about \(100\times0.34\ \mathrm{nm}\approx
+        \mathbf{34\ nm}\) of physical space.
       </div>
     </div>
     <p>The extracted <span class="redword">reduced</span> rate then becomes SI:</p>
