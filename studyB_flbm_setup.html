@@ -33,8 +33,8 @@ svg{display:block;width:100%;height:auto}
 .scene{display:none}
 .scene.show{display:block}
 .axis{stroke:var(--ink);stroke-width:1}
-.tick{font:10.5px var(--mono);fill:var(--steel)}
-.axlab{font:12.5px var(--serif);font-style:italic;fill:var(--ink)}
+.tick{font:13px var(--mono);fill:var(--steel)}
+.axlab{font:15.5px var(--serif);font-style:italic;fill:var(--ink)}
 .mlab{font-family:var(--serif);font-style:italic}
 .lyr{transition:opacity .3s ease}
 .dimmed{opacity:0;pointer-events:none}
@@ -71,7 +71,7 @@ footer{margin-top:28px;border-top:1px solid var(--line);padding-top:14px;color:v
 <header>
   <div class="eyebrow">Study B · Simulation setup</div>
   <h1>Configuring the fluctuating Shan–Chen model to reproduce the <span class="th">Gallo (2018)</span> / <span class="th">Diemand (2014)</span> nucleation benchmark</h1>
-  <div class="sub">Six setup decisions, anchored on the Maxwell construction of the LJ–MBWR equation of state (Johnson–Zollweg–Gubbins 1993). All curves on the diagram are computed from the MBWR parameterisation, not sketched.</div>
+  <div class="sub">A periodic box of superheated Lennard&ndash;Jones liquid &mdash; no walls, no seeds &mdash; where thermal fluctuations alone nucleate vapour embryos. Six setup decisions, anchored on the Maxwell construction of the LJ&ndash;MBWR equation of state (Johnson&ndash;Zollweg&ndash;Gubbins 1993). All curves on the diagram are computed from the MBWR parameterisation, not sketched.</div>
 </header>
 
 <div class="grid">
@@ -109,8 +109,8 @@ const path = pts => 'M'+pts.filter(q=>q[1]>=Y0-0.02&&q[1]<=Y1+0.05).map(q=>sx(q[
 /* small helper: italic-serif math label with optional subscript / superscript */
 const m = (main, sub='', sup='', extra='') =>
  `<tspan class="mlab">${main}</tspan>`+
- (sub?`<tspan class="mlab" font-size="8" dy="3">${sub}</tspan><tspan dy="-3">${extra}</tspan>`:`<tspan>${extra}</tspan>`)+
- (sup?`<tspan class="mlab" font-size="8" dy="-6">${sup}</tspan><tspan dy="6"> </tspan>`:'');
+ (sub?`<tspan class="mlab" font-size="10.5" dy="3.5">${sub}</tspan><tspan dy="-3">${extra}</tspan>`:`<tspan>${extra}</tspan>`)+
+ (sup?`<tspan class="mlab" font-size="10.5" dy="-6">${sup}</tspan><tspan dy="6"> </tspan>`:'');
 
 const M = D.maxwell125;
 let s='';
@@ -187,28 +187,13 @@ d2+=`<text x="${fx-38}" y="${fy+cs/2-8}" text-anchor="end" class="tick" fill="va
 d2+=`<line x1="${fx}" y1="${fy+cs+40}" x2="${fx+cs}" y2="${fy+cs+40}" stroke="var(--ink)" stroke-width="1"/>
 <line x1="${fx}" y1="${fy+cs+34}" x2="${fx}" y2="${fy+cs+46}" stroke="var(--ink)" stroke-width="1"/>
 <line x1="${fx+cs}" y1="${fy+cs+34}" x2="${fx+cs}" y2="${fy+cs+46}" stroke="var(--ink)" stroke-width="1"/>
-<text x="${fx+cs/2}" y="${fy+cs+60}" text-anchor="middle" class="tick" fill="var(--ink)">edge <tspan class="mlab">L</tspan> → target 600 <tspan class="mlab">σ</tspan>  (Gallo box 600³ <tspan class="mlab">σ</tspan><tspan font-size="8" dy="-5">3</tspan><tspan dy="5">)</tspan></text>`;
-/* magnifier inset: interface resolution */
-const ix=505, iy=88, iw=210, ih=140, ncell=10, cw=iw/ncell;
-d2+=`<circle cx="${fx+cs-24}" cy="${fy+40}" r="13" fill="none" stroke="var(--steel)" stroke-width="1.4"/>
-<line x1="${fx+cs-14}" y1="${fy+50}" x2="${ix-6}" y2="${iy+ih/2}" stroke="var(--steel)" stroke-width="1" stroke-dasharray="3 3"/>`;
-d2+=`<rect x="${ix}" y="${iy}" width="${iw}" height="${ih}" fill="#fff" stroke="var(--steel)" stroke-width="1.2"/>`;
-for(let i=1;i<ncell;i++){d2+=`<line x1="${ix+i*cw}" y1="${iy}" x2="${ix+i*cw}" y2="${iy+ih}" stroke="#e2e6ec"/>`;}
-/* diffuse interface profile: tanh over ~5 cells */
-let prof='M';
-for(let i=0;i<=100;i++){const xx=ix+i/100*iw; const t=Math.tanh((i/100*ncell-5)/1.15); const yy=iy+ih*0.78 - (t+1)/2*ih*0.56; prof+=`${xx.toFixed(1)},${yy.toFixed(1)}${i<100?'L':''}`;}
-d2+=`<path d="${prof}" fill="none" stroke="var(--cryo)" stroke-width="2"/>`;
-d2+=`<line x1="${ix+3.6*cw}" y1="${iy+10}" x2="${ix+3.6*cw}" y2="${iy+ih-8}" stroke="var(--signal)" stroke-width="1" stroke-dasharray="2 3"/>
-<line x1="${ix+6.4*cw}" y1="${iy+10}" x2="${ix+6.4*cw}" y2="${iy+ih-8}" stroke="var(--signal)" stroke-width="1" stroke-dasharray="2 3"/>
-<text x="${ix+iw/2}" y="${iy-8}" text-anchor="middle" class="tick">interface spans ≈ 4–6 nodes</text>
-<text x="${ix+iw/2}" y="${iy+ih+16}" text-anchor="middle" class="tick">⇒ <tspan class="mlab">Δx</tspan> ≈ 1–2 <tspan class="mlab">σ</tspan>,  <tspan class="mlab">L</tspan> ≈ 300–600 nodes</text>
-<text x="${ix+2}" y="${iy+ih*0.30}" class="tick" fill="var(--cryo)">liquid</text>
-<text x="${ix+iw-6}" y="${iy+ih*0.88}" text-anchor="end" class="tick" fill="var(--cryo)">vapour</text>`;
+<text x="${fx+cs/2}" y="${fy+cs+60}" text-anchor="middle" class="tick" fill="var(--ink)">edge <tspan class="mlab">L</tspan> → target 600 <tspan class="mlab">σ</tspan>  (Gallo box 600³ <tspan class="mlab">σ</tspan><tspan font-size="10" dy="-5">3</tspan><tspan dy="5">)</tspan></text>`;
+/* (interface-resolution inset removed) */
+const ix=505, iy=88;
 /* constraint list */
 const cons=[
  ['fixed volume and total mass','exact lattice mass conservation'],
  ['no walls, no external forcing','fluctuations act alone'],
- ['isothermal at θ₀  (canonical-like)','reference: NVE with fluctuating temperature field'],
  ['finite-size check','one state repeated at two L']];
 let cy=300;
 for(const [a,b] of cons){
@@ -250,7 +235,7 @@ const slope=(p2[1]-p1[1])/(p2[0]-p1[0]);
 const e1=[nx(0.06),p1[1]-slope*(p1[0]-nx(0.06))], e2=[nx(0.58),p1[1]+slope*(nx(0.58)-p1[0])];
 d3+=`<line x1="${e1[0]}" y1="${e1[1]}" x2="${e2[0]}" y2="${e2[1]}" stroke="var(--signal)" stroke-width="1.6" stroke-dasharray="6 4"/>`;
 d3+=`<text x="${nx(0.315)}" y="${ny(0.62)}" class="tick" fill="var(--signal)">linear fit → slope = <tspan class="mlab">JV</tspan></text>`;
-d3+=`<text x="${nx(0.315)}" y="${ny(0.545)}" class="tick" fill="var(--signal)">${m('J','','',' = ')}<tspan class="mlab">V</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5"> d</tspan><tspan class="mlab">N</tspan><tspan font-size="8" dy="3">b</tspan><tspan dy="-3">/d</tspan><tspan class="mlab">t</tspan></text>`;
+d3+=`<text x="${nx(0.315)}" y="${ny(0.545)}" class="tick" fill="var(--signal)">${m('J','','',' = ')}<tspan class="mlab">V</tspan><tspan font-size="8" dy="-5">−1</tspan><tspan dy="5"> d</tspan><tspan class="mlab">N</tspan><tspan font-size="10.5" dy="3.5">b</tspan><tspan dy="-3">/d</tspan><tspan class="mlab">t</tspan></text>`;
 /* Gallo expectation annotations */
 d3+=`<g>
 <text x="${nx(0.80)}" y="${ny(0.86)}" text-anchor="middle" class="tick" fill="var(--ink)" font-weight="500">expected peak (Gallo, <tspan class="mlab">θ</tspan> = 1.25):</text>
@@ -259,7 +244,7 @@ d3+=`<g>
 <text x="${nx(0.80)}" y="${ny(0.66)}" text-anchor="middle" class="tick" fill="var(--steel)">closer to the spinodal → lower barrier,</text>
 <text x="${nx(0.80)}" y="${ny(0.60)}" text-anchor="middle" class="tick" fill="var(--steel)">faster nucleation, more bubbles</text>
 </g>`;
-d3+=`<text x="${nx(0.09)}" y="${ny(0.30)}" class="tick" fill="var(--steel)">threshold ¾(<tspan class="mlab">n</tspan><tspan font-size="8" dy="3">l</tspan><tspan dy="-3"> − </tspan><tspan class="mlab">n</tspan><tspan font-size="8" dy="3">g</tspan><tspan dy="-3">) + connected-</tspan></text>
+d3+=`<text x="${nx(0.09)}" y="${ny(0.30)}" class="tick" fill="var(--steel)">threshold ¾(<tspan class="mlab">n</tspan><tspan font-size="10.5" dy="3.5">l</tspan><tspan dy="-3"> − </tspan><tspan class="mlab">n</tspan><tspan font-size="10.5" dy="3.5">g</tspan><tspan dy="-3">) + connected-</tspan></text>
 <text x="${nx(0.09)}" y="${ny(0.245)}" class="tick" fill="var(--steel)">component labelling per frame</text>`;
 d3+='</svg>';
 document.getElementById('scene-nbt').innerHTML=d3;
@@ -274,23 +259,22 @@ const stages=[
  cap:'The LJ–MBWR isotherms with the binodal (solid), spinodal (dashed), and the Maxwell tie line at θ = 1.25.'},
 {t:'Metastable states', scene:'phase',
  body:`<p>Runs are placed at the discrete states of the reference rate curve: \\( \\theta_0 = 1.25 \\) with \\( \\rho_L \\in \\{0.45, 0.46, 0.47, 0.48\\} \\), and \\( \\theta_0 = 1.20 \\) with \\( \\rho_L \\in \\{0.51, 0.52\\} \\). With \\( \\theta_c = 1.313 \\) these are \\( T/T_c \\approx 0.95 \\) and \\( 0.91 \\), inside the Diemand MD window.</p>
- <p>The window at \\( \\theta = 1.25 \\) is bounded by the liquid spinodal (0.440) and the binodal (0.512). In the interpolation form \\( n_{\\mathrm{init}} = n_{s,l}(1-a) + a\\,n_l \\), the reference states correspond to \\( a \\approx 0.14\\text{–}0.57 \\) — <span class="warn">not</span> the near-spinodal \\( a = 0.02 \\) of the 2D template.</p>
+ <p>The metastable window at \\( \\theta = 1.25 \\) spans reduced densities from 0.44 to 0.51, bounded by the liquid spinodal (0.440) and the binodal (0.512). In the interpolation form \\( \\rho_{\\mathrm{init}} = \\rho_{s,l}(1-a) + a\\,\\rho_l \\), the reference states correspond to \\( a \\approx 0.14\\text{–}0.57 \\) — <span class="warn">not</span> the near-spinodal \\( a = 0.02 \\) of the 2D template.</p>
  <div class="exp"><b>Expected (Gallo, Table I)</b>The free-energy barrier grows away from the spinodal: \\( \\Delta\\Omega/k_B\\theta_0 \\approx 3 \\to 43 \\) across \\( \\rho_L = 0.45 \\to 0.48 \\), so nucleation slows sharply along this scan.</div>`,
- on:['ly-iso125','ly-band','ly-maxwell','ly-window','ly-gallo'],
+ on:['ly-iso125','ly-iso120','ly-band','ly-maxwell','ly-window','ly-gallo'],
  cap:'The metastable-liquid window at θ = 1.25 and the six benchmark states (squares: θ = 1.25; circles: θ = 1.20).'},
 {t:'Domain and boundary conditions', scene:'domain',
- body:`<p>Cubic box, periodic in all three directions; no walls, no external forcing. The lattice update conserves mass exactly, so volume and total mass are fixed, as in the reference.</p>
- <p>The reference grid spacing (\\( \\Delta x = 12\\,\\sigma \\)) does not transfer: the pseudopotential interface occupies a fixed ≈ 4–6 lattice nodes, so \\( \\Delta x \\approx 1\\text{–}2\\,\\sigma \\). The box therefore targets the reference physical edge of \\( 600\\,\\sigma \\) where affordable; \\( J \\) is intensive, so box size affects statistics, not the rate.</p>
- <p>The reference evolves temperature as a fluctuating field (NVE); the fluctuating Shan–Chen scheme is isothermal at \\( \\theta_0 \\). This ensemble difference is stated up front and returned to in the discussion of the comparison.</p>`,
+ body:`<p>Cubic box, periodic in all three directions; no walls, no seeds, no external forcing. The lattice update conserves mass exactly, so volume and total mass are fixed, as in the reference.</p>
+ <p>The box targets the reference physical edge of \\( 600\\,\\sigma \\) where affordable; \\( J \\) is intensive, so box size affects statistics, not the rate.</p>`,
  on:[],
- cap:'The simulation domain: periodic L³ at fixed mass and volume, with the interface-resolution argument fixing Δx.'},
+ cap:'The simulation domain: periodic L³ at fixed mass and volume.'},
 {t:'Initialization and thermal noise', scene:'phase',
- body:`<p>Each realisation starts as a homogeneous metastable liquid: uniform \\( \\rho_L \\), zero velocity, populations at local equilibrium \\( f_i = f_i^{\\mathrm{eq}}(\\rho_L, \\mathbf{u}=0) \\). No vapour nuclei are seeded. Realisations differ only in the random seed.</p>
+ body:`<p>Each realisation starts as a homogeneous metastable liquid: uniform \\( \\rho_L \\), zero velocity, populations at local equilibrium \\( f_i = f_i^{\\mathrm{eq}}(\\rho_L, \\mathbf{u}=0) \\). No vapour nuclei are seeded: thermal fluctuations alone nucleate the vapour embryos. Realisations differ only in the random seed.</p>
  <p>The noise amplitude is fixed by the fluctuation–dissipation theorem in the non-conserved modes. Before any rate is extracted, the amplitude is verified through the long-wavelength structure factor \\( S(k \\to 0) = k_B T \\big/ (\\partial p/\\partial \\rho)_T \\) at the simulated metastable states — the rate depends exponentially on \\( k_B T \\) through \\( \\exp(-\\Delta G^{*}/k_B T) \\), so this check comes first.</p>`,
- on:['ly-iso125','ly-gallo','ly-band','ly-window'],
+ on:['ly-iso125','ly-iso120','ly-gallo','ly-band','ly-window'],
  cap:'Every run begins on the isotherm at one of the marked states; fluctuations alone drive it off.'},
 {t:'Nucleation rate', scene:'nbt',
- body:`<p>Density fields are thresholded at \\( \\tfrac{3}{4}(n_l - n_g) \\) below the liquid density; connected vapour regions are labelled, giving the bubble count \\( N_b(t) \\). Only the steady-state regime — linear growth of \\( N_b(t) \\), after inception and before bubble interaction — is used, and the rate is \\( J = V^{-1}\\, \\mathrm{d}N_b/\\mathrm{d}t \\), averaged over ≥ 10 seeds per state (32 where affordable).</p>
+ body:`<p>Bubbles are detected with a density threshold and cluster counting: fields are thresholded at \\( \\tfrac{3}{4}(\\rho_l - \\rho_v) \\) below the liquid density, and connected vapour regions are labelled, giving the bubble count \\( N_b(t) \\). The rate is extracted from the slope of the number of bubbles per unit volume versus time, \\( J = V^{-1}\\, \\mathrm{d}N_b/\\mathrm{d}t \\) — read only in the steady-state regime, after inception and before bubble interaction — averaged over ≥ 10 seeds per state (32 where affordable).</p>
  <div class="exp"><b>Expected (Gallo)</b>Three phases after inception: linear nucleating growth, a collapsing phase in which supercritical bubbles are destroyed by the compression of the fixed-mass liquid, and a slowly expanding multibubble stage. Peak counts at \\( \\theta = 1.25 \\): \\( N_{\\max} = 458 \\) at \\( \\rho_L = 0.46 \\) versus \\( 52 \\) at \\( \\rho_L = 0.48 \\).</div>`,
  on:[],
  cap:'N_b(t) schematic: the rate is read only from the steady-state slope, before bubble interaction begins.'},
@@ -301,9 +285,9 @@ const stages=[
  <tr><td>Diemand 2014 (MD)</td><td>rate window \\( 10^{27}\\text{–}10^{31}\\ \\mathrm{m^{-3}\\,s^{-1}} \\)</td></tr>
  <tr><td>CNT (Blander–Katz)</td><td>barrier + prefactor on the same isotherms</td></tr></table>
  <div class="exp"><b>Expected (Gallo, Fig. 6)</b>\\( J^{*} \\) falls by several orders of magnitude across \\( \\rho_L = 0.45 \\to 0.48 \\); FH rates agree with NVE molecular dynamics. Deviations from CNT go in a known direction — CNT overestimates the barrier near the spinodal and underestimates it at high temperature — and multibubble collapse suppresses the measured rate by roughly a factor of 15 relative to a no-collapse count. Reproducing this curve, including these deviations, is the validation target.</div>
- <p>The SI conversion of the validated rate is a separate step, so the benchmark itself does not depend on the unit-conversion procedure.</p>`,
- on:['ly-iso125','ly-gallo','ly-maxwell','ly-window','ly-band'],
- cap:'The deliverable: J*(ρ_L) on the same states, then converted to SI units in a separate, later step.'}
+ `,
+ on:['ly-iso125','ly-iso120','ly-gallo','ly-maxwell','ly-window','ly-band'],
+ cap:'The deliverable: J*(ρ_L) on the same states — lattice units → LJ reduced units for the comparison, then → SI.'}
 ];
 
 const ALL=['ly-band','ly-iso120','ly-binodal','ly-spinodal','ly-iso125','ly-crit','ly-maxwell','ly-window','ly-gallo'];
@@ -329,12 +313,9 @@ document.getElementById('prev').addEventListener('click',()=>go(cur-1));
 document.getElementById('next').addEventListener('click',()=>go(cur+1));
 window.addEventListener('keydown',e=>{if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);});
 go(0);
-document.addEventListener('DOMContentLoaded',()=>{
-  if(window.renderMathInElement){renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});}
-});
-window.addEventListener('load',()=>{
-  if(window.renderMathInElement){renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});}
-});
+function typeset(){if(window.renderMathInElement){renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}]});}}
+document.addEventListener('DOMContentLoaded',typeset);
+window.addEventListener('load',typeset);
 </script>
 </body>
 </html>
